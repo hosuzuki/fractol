@@ -59,10 +59,10 @@ $(MLX) :
 
 clean :
 	$(MAKE) clean -sC ./libft
-	$(RM) $(OBJ) $(BONUS_OBJ)
+	$(RM) $(OBJS) $(BONUS_OBJS)
 #	@rm -rf $(OBJS_DIRECTORY)
 #	@echo "$(NAME): $(RED)$(OBJS_D) was deleted$(RESET)"
-	@echo "$(NAME): $(RED)object files were deleted$(RESET)"
+	@echo "$(NAME): $(GREEN)object files were deleted$(RESET)"
 
 fclean : clean
 	$(MAKE) fclean -sC ./libft
@@ -70,7 +70,7 @@ fclean : clean
 	$(MAKE) clean -sC ./minilibx-linux
 #	@echo "$(NAME): $(RED)$(MLX) was deleted$(RESET)"
 	$(RM) $(NAME) $(BONUS_NAME)
-	@echo "$(NAME): $(RED)$(NAME) was deleted$(RESET)"
+	@echo "$(NAME): $(GREEN)$(NAME) was deleted$(RESET)"
 
 re : fclean all
 
