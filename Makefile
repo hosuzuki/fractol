@@ -5,7 +5,10 @@ FLAGS = -Wall -Werror -Wextra
 #LIBFT = ./libft
 LIB = ./libft/libft.a
 MLX = ./minilibx-linux/libmlx.a
-LIBRARIES = -lmlx -framework OpenGL -framework AppKit -L ./libft/ -L ./minilibx-linux/ 
+LIBRARIES = -L/usr/X11R6/lib  -lmlx -lX11 -lXext -framework OpenGL -framework AppKit -L ./libft/ -L ./minilibx-linux/
+#LIBRARIES = -lmlx -framework OpenGL -framework AppKit $(LIB) $(MLX)
+#LIBRARIES = -lmlx -framework OpenGL -framework AppKit -L ./libft/ -L ./minilibx-linux/
+#LIBRARIES = -Lmlx -lmlx -framework OpenGL -framework AppKit -L ./libft/ -L ./minilibx-linux/ 
 #MLX_HEADERS = ./minilibx-linux
 SRCS = ./srcs/main.c 
 #			./srcs/fractol.c \
@@ -46,8 +49,9 @@ $(NAME) : $(LIB) $(MLX) $(OBJS)
 #$(NAME) : $(OBJ) $(LIB)
 #	$(CC) $(FLAGS) $(OBJ) $(LIB) -o $(NAME) -g
 
-#.c.o :
-#	$(CC) $(FLAGS) -c $< -o $(<:.c=.o) $(HEAD) -g
+.c.o :
+#	$(CC) $(FLAGS) -lmlx -c $< -o $(<:.c=.o) $(HEAD) -g
+	$(CC) $(FLAGS) -c $< -o $(<:.c=.o) $(HEAD)
 
 $(LIB) : 
 	@echo "$(NAME): $(GREEN)Creating $(LIB)...$(RESET)"
