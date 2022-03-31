@@ -63,20 +63,6 @@ int	select_fractal(t_data *data, char *str)
 	return (true);
 }
 
-int	main_loop(t_data *data)
-{
-	if (data->is_pressed_shift)
-		update_fractal(data);
-	if (data->fract_type == MANDELBROT)
-		draw_mandelbrot(data);
-	else if (data->fract_type == JULIA)
-		draw_julia(data);
-//	else if (data->fract_type == BURNINGSHIP)
-//		draw_burningship(data);
-	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
-	return (0);
-}
-
 int	main(int argc, char **argv)
 {
 	t_data	data;
