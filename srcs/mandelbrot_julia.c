@@ -1,26 +1,64 @@
 #include "fractol.h"
 
-static uint32_t	get_color_in_fractal(t_data *data)
+#include "fractol.h"
+
+//void	img_pix_put(t_data *data, int x, int y, int color)
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
-	int		iteration;
+	char    *pixel;
+	int		i;
+
+	i = data->bpp - 8;
+    pixel = data->addr + (y * data->line_len + x * (data->bpp / 8));
+	while (i >= 0)
+	{
+		/* big endian, MSB is the leftmost bit */
+		if (data->endian != 0)
+			*pixel++ = (color >> i) & 0xFF;
+		/* little endian, LSB is the leftmost bit */
+		else
+			*pixel++ = (color >> (data->bpp - 8 - i)) & 0xFF;
+		i -= 8;
+	}
+}
+/*
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+{
+	char	*dst;
+
+	dst = data->addr + (y * data->line_len
+			+ x * (data->bpp / 8));
+	*(unsigned int *)dst = color;
+}
+*/
+
+uint32_t	get_color(t_data data, int x, int y)
+{
+	return (*(uint32_t *)(data.addr
+		+ (y * data.line_len + x * (data.bpp / 8))));
+}
+
+static uint32_t	pick_color(t_data *data)
+{
+	int		i;
 	int		color;
 	double	tmp_x;
 
-	iteration = 0;
+	i = 0;
 	while (data->z_re * data->z_re + data->z_im * data->z_im <= 4
-		&& iteration < data->max_iter)
+		&& i < data->max_iter)
 	{
 		tmp_x = data->z_re * data->z_re
 			- data->z_im * data->z_im + data->c_re;
 		data->z_im = 2 * data->z_re * data->z_im + data->c_im;
 		data->z_re = tmp_x;
-		iteration++;
+		i++;
 	}
-	if (iteration == data->max_iter)
+	if (i == data->max_iter)
 		color = rgb2hex(0, 0, 0);
 	else
-		color = hsv2hex(iteration % 360, (double)iteration / data->max_iter,
-				((double)iteration / data->max_iter));
+		color = hsv2hex(i % 360, (double)i / data->max_iter,
+				((double)i / data->max_iter));
 	return (color);
 }
 
@@ -53,8 +91,7 @@ int	draw_mandelbrot(t_data *data)
 			data->c_re = data->min_re + x * data->delta_re;
 			data->z_re = 0;
 			data->z_im = 0;
-			my_mlx_pixel_put(&data->img, x, y,
-				get_color_in_fractal(data));
+			my_mlx_pixel_put(data, x, y, pick_color(data));
 			x++;
 		}
 		y++;
@@ -69,7 +106,6 @@ int	draw_mandelbrot(t_data *data)
  * Z_0 is the position of the pixel to be drawn.
  *
  * If divergence occurs, it is filled with black.
- */
 int	draw_julia(t_data *data)
 {
 	int	x;
@@ -93,3 +129,5 @@ int	draw_julia(t_data *data)
 	}
 	return (0);
 }
+
+*/

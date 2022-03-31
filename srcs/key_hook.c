@@ -30,7 +30,7 @@ int	exit_and_destroy_win(t_data *data)
 	exit(0);
 }
 
-int	key_press_hook(int keysym, t_data *data)
+int	key_down_hook(int keysym, t_data *data)
 {
 	ft_printf("keysym: %d\n", keysym);
 	if (keysym == KEY_ESC)
@@ -43,10 +43,13 @@ int	key_press_hook(int keysym, t_data *data)
 	return (0);
 }
 
-int	key_release_hook(int keysym, t_data *data)
+/*
+int	key_up_hook(int keysym, t_data *data)
 {
 	ft_printf("keysym: %d\n", keysym);
 	if (keysym == KEY_SHIFT)
 		data->is_pressed_shift = false;
 	return (0);
 }
+
+*/

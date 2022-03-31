@@ -11,6 +11,7 @@ static void	zoom_image(t_data *data, int button, int x, int y)
 	double	mouse_im;
 	double	interpolation;
 
+	interpolation = 0.0;
 	mouse_re = (double)x
 		/ (WIDTH / (data->max_re - data->min_re)) + data->min_re;
 	mouse_im = (double)y
