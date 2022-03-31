@@ -1,56 +1,111 @@
-#include "fract.h"
+#include "fractol.h"
 
-void my_mlx_pixel_put(t_data *data, int x, int y, int color)
+void ft_free_all(t_data *data)
 {
-	char	*dst;
-
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel /8));
-	*(unsigned int *)dst = color;
+	if (data->mlx)
+		free(data->mlx);
+	if (data->win)
+		free(data->win);
+	if (data->img)
+		free(data->img);
+	if (data->addr)
+		free(data->addr);
 }
 
-int create_trgb(int t, int r, int g, int b)
+void ft_free_all_and_exit_with_perror(t_data *data)
 {
-	return (t << 24 | r << 16 | g << 8 | b);
+	ft_free_all(data);
+	perror("1");
+	exit(1);
 }
 
-int	get_t(int trgb)
+void	assign_null(t_data *data)
 {
-	return ((trgb >> 24) & 0xFF);
+	data->mlx = NULL;
+	data->win = NULL;
+	data->img = NULL;
+	data->addr = NULL;
 }
 
-int get_r(int trgb)
+void	init_data(t_data *data)
 {
-	return ((trgb >> 16) & 0xFF);
+	assign_null(data);
+	data->mlx = mlx_init();
+	if (!data->mlx)
+		ft_free_all_and_exit_with_perror(data);
+	data->win = mlx_new_window(data->mlx, WIDTH, HEIGHT, "fract-ol");
+	if (!data->win)
+		ft_free_all_and_exit_with_perror(data);
+	data->img = mlx_new_image(data->mlx, WIDTH, HEIGHT);
+	if (!data->img)
+		ft_free_all_and_exit_with_perror(data);
+	data->addr = mlx_get_data_addr(data->img, &data->bpp, &data->line_len, &data->endian);
+	data->is_pressed_shift = false;
+	data->max_re = 2;
+	data->max_im = 2;
+	data->min_re = -2;
+	data->min_im = -2;
+	data->max_iter = DEFAULT_MAX_ITER;
+	data->c_re = DEFAULT_JULIA_C_RE;
+	data->c_im = DEFAULT_JULIA_C_IM;
 }
 
-int get_g(int trgb)
+int	select_fractal(t_data *data, char *str)
 {
-	return ((trgb >> 8) & 0xFF);
+	if (!ft_strncmp(str, "mandelbrot", 11))
+		data->fract_type = MANDELBROT;
+	else if (!ft_strncmp(str, "julia", 6))
+		data->fract_type = JULIA;
+//	else if (!ft_strncmp(str, "burningship", 12))
+//		data->fract_type = BURNINGSHIP;
+	else
+		return (false);
+	return (true);
 }
 
-int get_b(int trgb)
+int	main_loop(t_data *data)
 {
-	return (trgb & 0xFF);
+	if (data->is_pressed_shift)
+		update_fractal(data);
+	if (data->fract_type == MANDELBROT)
+		draw_mandelbrot(data);
+	else if (data->fract_type == JULIA)
+		draw_julia(data);
+//	else if (data->fract_type == BURNINGSHIP)
+//		draw_burningship(data);
+	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
+	return (0);
 }
 
-int create_trgb(unsigned char t, unsigned char r, unsigned char g, unsigned char b)
+int	main(int argc, char **argv)
 {
-	return (*(int *)(unsigned char [4]{b, g, r t});
+	t_data	data;
+
+	if (argc != 2 || !select_fractal(&data, argv[1]))
+	{
+		ft_printf("Please input one of fractal types below after ./fractol\n");
+		ft_printf("- mandelbrot\n");
+		ft_printf("- julia\n");
+		return (1);
+	}
+	init_data(&data);
+
+	mlx_hook(data.win, KEYDOWN, 1L<<0, key_press_hook, &data);
+	mlx_hook(data.win, KEYUP, 1L<<1, key_release_hook, &data);
+	mlx_hook(data.win, ClientMessage, 1L << 17, exit_and_destory_win, &data); // ??
+
+	mlx_mouse_hook(data.win, mouse_hook, &data);
+	mlx_loop_hook(data.mlx, &main_loop, &data);
+
+	//	mlx_loop_hook(data.mlx, &render, &data);
+//	mlx_mouse_hook(data.win, mouse_button, 0);
+//	mlx_hook(data.win, 2, 1L<<0, key_hook, &data);
+	mlx_loop(data.mlx);
+
+	mlx_destroy_image(data.mlx, data.img);
+	mlx_destroy_display(data.mlx);
+	ft_free_all(&data);
 }
-
-
-int main(void)
-{
-	void	*mlx;
-	void	*mlx_win;
-	t_data	img;
-
-	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, 1920, 1080, "Hello world!");
-	img.img	= mlx_new_image(mlx, 1920, 1080);
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
-	my_mlx_pixel_put(&img, 5, 5, 0x00FF0000);
-	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
-	mlx_loop(mlx);
-}
-
+/*
+	mlx_loop(canvas.mlx);
+*/
