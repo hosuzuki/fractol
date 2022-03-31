@@ -1,7 +1,7 @@
 #include "fractol.h"
 
 /*
-void	update_fractal(t_data *data)
+void	ft_update_fractal(t_data *data)
 {
 	int		x;
 	int		y;
@@ -23,10 +23,12 @@ void	update_fractal(t_data *data)
 
 */
 
-int	main_loop(t_data *data)
+int	ft_render(t_data *data)
 {
-//	if (data->is_pressed_shift)
-//		update_fractal(data);
+//	if (data->shift_on)
+//	{
+//		printf("update_fractal\n");
+//		ft_update_fractal(data);
 	if (data->fract_type == MANDELBROT)
 		draw_mandelbrot(data);
 //	else if (data->fract_type == JULIA)
