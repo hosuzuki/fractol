@@ -10,7 +10,7 @@ LIBRARIES = -L/usr/X11R6/lib  -lmlx -lX11 -lXext -framework OpenGL -framework Ap
 #LIBRARIES = -lmlx -framework OpenGL -framework AppKit -L ./libft/ -L ./minilibx-linux/
 #LIBRARIES = -Lmlx -lmlx -framework OpenGL -framework AppKit -L ./libft/ -L ./minilibx-linux/ 
 #MLX_HEADERS = ./minilibx-linux
-SRCS = ./srcs/main.c 
+SRC = ./srcs/main.c 
 #			./srcs/fractol.c \
 			./srcs/init.c \
 			./srcs/draw.c \
@@ -21,28 +21,28 @@ SRCS = ./srcs/main.c
 			./srcs/keyboard.c \
 			./srcs/mouse.c \
 			./srcs/utils.c
-BONUS_SRCS = ./srcs/main.c
-#OBJS_D = objs/
-#OBJS_LIST = $(patsubst %.c, %.o, $(SRCS))
-#OBJS	= $(addprefix $(OBJS_D), $(OBJS_LIST))
+BONUS_SRC = ./srcs/main.c
+#OBJ_D = objs/
+#OBJ_LIST = $(patsubst %.c, %.o, $(SRC))
+#OBJ	= $(addprefix $(OBJ_D), $(OBJ_LIST))
 GREEN = \033[0;32m
 RED = \033[0;31m
 RESET = \033[0m
 
-OBJS = $(SRCS:.c=.o)
-BONUS_OBJS = $(BONUS_SRCS:.c=.o)
+OBJ = $(SRC:.c=.o)
+BONUS_OBJ = $(BONUS_SRC:.c=.o)
 HEAD = -I ./includes
 RM = rm -f
 ifdef BONUS_ON
 #NAME = $(BONUS_NAME)
-SRCS = $(BONUS_SRCS)
-OBJS = $(BONUS_OBJS)
+SRC = $(BONUS_SRC)
+OBJ = $(BONUS_OBJ)
 endif
 
 all : $(NAME)
 
-$(NAME) : $(LIB) $(MLX) $(OBJS)
-	$(CC) $(FLAGS) $(OBJS) $(LIBRARIES) -o $(NAME)
+$(NAME) : $(LIB) $(MLX) $(OBJ)
+	$(CC) $(FLAGS) $(OBJ) $(LIBRARIES) -o $(NAME)
 	@echo "$(NAME): $(GREEN)object files were created$(RESET)"
 	@echo "$(NAME): $(GREEN)$(NAME) was created$(RESET)"
 
@@ -63,9 +63,9 @@ $(MLX) :
 
 clean :
 	$(MAKE) clean -sC ./libft
-	$(RM) $(OBJS) $(BONUS_OBJS)
-#	@rm -rf $(OBJS_DIRECTORY)
-#	@echo "$(NAME): $(RED)$(OBJS_D) was deleted$(RESET)"
+	$(RM) $(OBJ) $(BONUS_OBJ)
+#	@rm -rf $(OBJ_DIRECTORY)
+#	@echo "$(NAME): $(RED)$(OBJ_D) was deleted$(RESET)"
 	@echo "$(NAME): $(GREEN)object files were deleted$(RESET)"
 
 fclean : clean
