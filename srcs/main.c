@@ -1,53 +1,41 @@
 #include "fractol.h"
 
-void ft_free_all(t_data *data)
+/*
+void	ft_update_fractal(t_data *data)
 {
-	if (data->mlx)
-		free(data->mlx);
-	if (data->win)
-		free(data->win);
-	if (data->img)
-		free(data->img);
-	if (data->addr)
-		free(data->addr);
-}
+	int		x;
+	int		y;
+//	double	mouse_re;
+//	double	mouse_im;
 
-void ft_free_all_and_exit_with_perror(t_data *data)
-{
-	ft_free_all(data);
-	perror("1");
-	exit(1);
+	mlx_mouse_get_pos(data->mlx, data->win, &x, &y);
+	if (!x && !y)
+		return ;
+//	mouse_re = (double)x
+	data->c_re = (double)x
+	/ (WIDTH / (data->max_re - data->min_re)) + data->min_re;
+//	mouse_im = (double)y
+	data->c_im = (double)y
+	/ (HEIGHT / (data->max_im - data->min_im)) * -1 + data->max_im;
+//	data->c_re = mouse_re;
+//	data->c_im = mouse_im;
 }
+*/
 
-void	assign_null(t_data *data)
+int	ft_render(t_data *data)
 {
-	data->mlx = NULL;
-	data->win = NULL;
-	data->img = NULL;
-	data->addr = NULL;
-}
-
-void	init_data(t_data *data)
-{
-	assign_null(data);
-	data->mlx = mlx_init();
-	if (!data->mlx)
-		ft_free_all_and_exit_with_perror(data);
-	data->win = mlx_new_window(data->mlx, WIDTH, HEIGHT, "fract-ol");
-	if (!data->win)
-		ft_free_all_and_exit_with_perror(data);
-	data->img = mlx_new_image(data->mlx, WIDTH, HEIGHT);
-	if (!data->img)
-		ft_free_all_and_exit_with_perror(data);
-	data->addr = mlx_get_data_addr(data->img, &data->bpp, &data->line_len, &data->endian);
-	data->is_pressed_shift = false;
-	data->max_re = 1.7;
-	data->max_im = 2;
-	data->min_re = -2.3;
-	data->min_im = -2;
-	data->max_iter = DEFAULT_MAX_ITER;
-	data->c_re = DEFAULT_JULIA_C_RE;
-	data->c_im = DEFAULT_JULIA_C_IM;
+//	if (data->shift_on)
+//	{
+//		printf("update_fractal\n");
+//		ft_update_fractal(data);
+	if (data->fract_type == MANDELBROT)
+		ft_draw_mandelbrot(data);
+//	else if (data->fract_type == JULIA)
+//		ft_draw_julia(data);
+//	else if (data->fract_type == BURNINGSHIP)
+//		ft_draw_burningship(data);
+	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
+	return (0);
 }
 
 int	select_fractal(t_data *data, char *str)
@@ -74,21 +62,17 @@ int	main(int argc, char **argv)
 		ft_printf("- julia\n");
 		return (1);
 	}
-	init_data(&data);
-	mlx_loop_hook(data.mlx, &main_loop, &data);
-
+	ft_init_data(&data);
+	mlx_loop_hook(data.mlx, &ft_render, &data);
 	mlx_hook(data.win, KEYDOWN, 1L<<0, key_down_hook, &data);
 //	mlx_hook(data.win, KEYUP, 1L<<1, key_up_hook, &data);
 //	mlx_hook(data.win, ClientMessage, 1L << 17, exit_and_destroy_win, &data); // ??
-
 	mlx_mouse_hook(data.win, mouse_hook, &data);
-
-	//	mlx_loop_hook(data.mlx, &render, &data);
-//	mlx_mouse_hook(data.win, mouse_button, 0);
-//	mlx_hook(data.win, 2, 1L<<0, key_hook, &data);
 	mlx_loop(data.mlx);
-
 	mlx_destroy_image(data.mlx, data.img);
+//	data.img = NULL;
+	mlx_destroy_window(data.mlx, data.win);
+//	data.win = NULL;
 	mlx_destroy_display(data.mlx);
-	ft_free_all(&data);
+//	ft_free_all(&data);
 }

@@ -1,9 +1,6 @@
 #include "fractol.h"
 
-#include "fractol.h"
-
-//void	img_pix_put(t_data *data, int x, int y, int color)
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+void	ft_my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
 	char    *pixel;
 	int		i;
@@ -21,6 +18,7 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 		i -= 8;
 	}
 }
+
 /*
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
@@ -32,33 +30,34 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 }
 */
 
-uint32_t	get_color(t_data data, int x, int y)
+uint32_t	ft_get_color(t_data data, int x, int y)
 {
 	return (*(uint32_t *)(data.addr
 		+ (y * data.line_len + x * (data.bpp / 8))));
 }
 
-static uint32_t	pick_color(t_data *data)
+uint32_t	ft_pick_color(t_data *data)
 {
 	int		i;
 	int		color;
 	double	tmp_x;
 
 	i = 0;
-	while (data->z_re * data->z_re + data->z_im * data->z_im <= 4
-		&& i < data->max_iter)
+	while (data->z_r * data->z_r + data->z_i * data->z_i <= 4
+//		&& i < data->max_iter)
+		&& i < MAX_ITER)
 	{
-		tmp_x = data->z_re * data->z_re
-			- data->z_im * data->z_im + data->c_re;
-		data->z_im = 2 * data->z_re * data->z_im + data->c_im;
-		data->z_re = tmp_x;
+		tmp_x = data->z_r * data->z_r	- data->z_i * data->z_i + data->c_r;
+		// ??
+		data->z_i = 2 * data->z_r * data->z_i + data->c_i;
+		data->z_r = tmp_x;
 		i++;
 	}
-	if (i == data->max_iter)
-		color = rgb2hex(0, 0, 0);
+//	if (i == data->max_iter)
+	if (i == MAX_ITER)
+		color = ft_rgb_to_hex(0, 0, 0);
 	else
-		color = hsv2hex(i % 360, (double)i / data->max_iter,
-				((double)i / data->max_iter));
+		color = ft_hsv_to_hex(i % 360, (double)i / MAX_ITER, ((double)i / MAX_ITER));
 	return (color);
 }
 
@@ -74,60 +73,27 @@ static uint32_t	pick_color(t_data *data)
  *   Z_(n+1) = Z_n ^ 2 + C (Z is an expression for a complex number)
  *   (a + bj)^2 = a^2 + 2abj - b^2
 */
-int	draw_mandelbrot(t_data *data)
+int	ft_draw_mandelbrot(t_data *data)
 {
 	int	x;
 	int	y;
 
-	data->delta_re = (data->max_re - data->min_re) / (WIDTH - 1);
-	data->delta_im = (data->max_im - data->min_im) / (HEIGHT - 1);
+	data->delta_r = (data->max_r - data->min_r) / (WIDTH - 1);
+	data->delta_i = (data->max_i - data->min_i) / (HEIGHT - 1);
 	y = 0;
 	while (y < HEIGHT)
 	{
 		x = 0;
 		while (x < WIDTH)
 		{
-			data->c_im = data->min_im + y * data->delta_im;
-			data->c_re = data->min_re + x * data->delta_re;
-			data->z_re = 0;
-			data->z_im = 0;
-			my_mlx_pixel_put(data, x, y, pick_color(data));
+			data->c_i = data->min_i + y * data->delta_i;
+			data->c_r = data->min_r + x * data->delta_r;
+			data->z_r = 0;
+			data->z_i = 0;
+			ft_my_mlx_pixel_put(data, x, y, ft_pick_color(data));
 			x++;
 		}
 		y++;
 	}
 	return (0);
 }
-
-/*
- * Draw the Julia set.
- * The Julia set is the set that does not diverge when z_n = z_(n-1) + C.
- * C is a complex constant (the same number is used for all pixels).
- * Z_0 is the position of the pixel to be drawn.
- *
- * If divergence occurs, it is filled with black.
-int	draw_julia(t_data *data)
-{
-	int	x;
-	int	y;
-
-	data->delta_re = (data->max_re - data->min_re) / (WIDTH - 1);
-	data->delta_im = (data->max_im - data->min_im) / (HEIGHT - 1);
-	y = 0;
-	while (y < HEIGHT)
-	{
-		x = 0;
-		while (x < WIDTH)
-		{
-			data->z_im = data->min_im + y * data->delta_im;
-			data->z_re = data->min_re + x * data->delta_re;
-			my_mlx_pixel_put(&data->img, x, y,
-				get_color_in_fractal(data));
-			x++;
-		}
-		y++;
-	}
-	return (0);
-}
-
-*/
