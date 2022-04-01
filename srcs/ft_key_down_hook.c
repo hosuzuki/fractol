@@ -26,7 +26,9 @@ void	ft_move_arrow_key(int keysym, t_data *data)
 
 int	ft_destroy_win_and_exit(t_data *data)
 {
+//	mlx_destroy_image(data.mlx, data.img);
 	mlx_destroy_window(data->mlx, data->win);
+//	mlx_destroy_display(data.mlx);
 	exit(0);
 }
 
