@@ -6,13 +6,18 @@ MLX = ./minilibx-linux/libmlx.a
 LIBRARIES = -L/usr/X11R6/lib  -lmlx -lX11 -lXext -framework OpenGL -framework AppKit -L ./minilibx-linux/
 #-L ./libft/ -L ./minilibx-linux/
 SRC = ./srcs/main.c \
-			./srcs/key_hook.c \
-			./srcs/zoom.c \
-			./srcs/draw.c \
-			./srcs/mandelbrot_julia.c \
-			./srcs/color.c 
+			./srcs/ft_init_data.c \
+			./srcs/ft_draw_mandelbrot.c \
+			./srcs/ft_draw_julia.c \
+			./srcs/ft_key_down_hook.c \
+			./srcs/ft_mouse_hook.c \
+			./srcs/ft_rgb_to_hex.c \
+			./srcs/ft_draw_burningship_bonus.c 
 
-#BONUS_SRC = ./srcs/burning_ship_bonus.c
+#BONUS_SRC = ./srcs/main_bonus.c
+#			./srcs/ft_draw_burningship_bonus.c 
+
+
 GREEN = \033[0;32m
 #RED = \033[0;31m
 RESET = \033[0m
