@@ -30,8 +30,8 @@ int	ft_render(t_data *data)
 //		ft_update_fractal(data);
 	if (data->fract_type == MANDELBROT)
 		ft_draw_mandelbrot(data);
-//	else if (data->fract_type == JULIA)
-//		ft_draw_julia(data);
+	else if (data->fract_type == JULIA)
+		ft_draw_julia(data);
 //	else if (data->fract_type == BURNINGSHIP)
 //		ft_draw_burningship(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
@@ -42,8 +42,8 @@ int	select_fractal(t_data *data, char *str)
 {
 	if (!ft_strncmp(str, "mandelbrot", 11))
 		data->fract_type = MANDELBROT;
-//	else if (!ft_strncmp(str, "julia", 6))
-//		data->fract_type = JULIA;
+	else if (!ft_strncmp(str, "julia", 6))
+		data->fract_type = JULIA;
 //	else if (!ft_strncmp(str, "burningship", 12))
 //		data->fract_type = BURNINGSHIP;
 	else
@@ -64,10 +64,10 @@ int	main(int argc, char **argv)
 	}
 	ft_init_data(&data);
 	mlx_loop_hook(data.mlx, &ft_render, &data);
-	mlx_hook(data.win, KEYDOWN, 1L<<0, key_down_hook, &data);
-//	mlx_hook(data.win, KEYUP, 1L<<1, key_up_hook, &data);
-//	mlx_hook(data.win, ClientMessage, 1L << 17, exit_and_destroy_win, &data); // ??
-	mlx_mouse_hook(data.win, mouse_hook, &data);
+	mlx_hook(data.win, KEYDOWN, 1L<<0, ft_key_down_hook, &data);
+	mlx_hook(data.win, KEYUP, 1L<<1, ft_key_up_hook, &data);
+//	mlx_hook(data.win, ClientMessage, 1L << 17, ft_exit_and_destroy_win, &data); // ??
+	mlx_mouse_hook(data.win, ft_mouse_hook, &data);
 	mlx_loop(data.mlx);
 	mlx_destroy_image(data.mlx, data.img);
 //	data.img = NULL;

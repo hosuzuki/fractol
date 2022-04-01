@@ -45,11 +45,11 @@ unsigned int	ft_pick_color(t_data *data)
 	double	tmp_r;
 
 	i = 0;
-	while (data->z_r * data->z_r + data->z_i * data->z_i <= 4
+	while (pow(data->z_r, 2.0) + pow(data->z_i, 2.0) <= 4 && i < MAX_ITER)
+
 //		&& i < data->max_iter)
-		&& i < MAX_ITER)
 	{
-		tmp_r = data->z_r * data->z_r	- data->z_i * data->z_i + data->c_r;
+		tmp_r = pow(data->z_r, 2.0) - pow(data->z_i, 2.0) + data->c_r;
  //   (a + bj)^2 = a^2 + 2abj - b^2
 		// a^2 - b^2 in this part. 
 		data->z_i = 2 * data->z_r * data->z_i + data->c_i;

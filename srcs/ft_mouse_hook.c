@@ -34,6 +34,7 @@ static void	ft_zoom_image(t_data *data, int button, double x, double y)
 
 int	ft_mouse_hook(int button, int x, int y, t_data *data)
 {
+	ft_printf("button: %d\n", button);
 	if (button == SCROLL_UP || button == SCROLL_DOWN)
 		ft_zoom_image(data, button, (double)x, (double)y);
 	return (0);
