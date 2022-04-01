@@ -1,6 +1,6 @@
 #include "fractol.h"
 
-void	move_arrow_key(int keysym, t_data *data)
+void	ft_move_arrow_key(int keysym, t_data *data)
 {
 	if (keysym == KEY_UP_ARROW)
 	{
@@ -24,32 +24,30 @@ void	move_arrow_key(int keysym, t_data *data)
 	}
 }
 
-int	exit_and_destroy_win(t_data *data)
+int	ft_destroy_win_and_exit(t_data *data)
 {
 	mlx_destroy_window(data->mlx, data->win);
 	exit(0);
 }
 
-int	key_down_hook(int keysym, t_data *data)
+int	ft_key_up_hook(int keysym, t_data *data)
+{
+	ft_printf("keysym: %d\n", keysym);
+	if (keysym == KEY_SHIFT)
+		data->shift_on = false;
+	return (0);
+}
+
+int	ft_key_down_hook(int keysym, t_data *data)
 {
 	ft_printf("keysym: %d\n", keysym);
 	if (keysym == KEY_ESC)
-		exit_and_destroy_win(data);
+		ft_destroy_win_and_exit(data);
 	if (keysym == KEY_SHIFT)
-		data->is_pressed_shift = true;
+		data->shift_on = true;
 	if (keysym == KEY_UP_ARROW || keysym == KEY_DW_ARROW
 		|| keysym == KEY_L_ARROW || keysym == KEY_R_ARROW)
-		move_arrow_key(keysym, data);
+		ft_move_arrow_key(keysym, data);
 	return (0);
 }
 
-/*
-int	key_up_hook(int keysym, t_data *data)
-{
-	ft_printf("keysym: %d\n", keysym);
-	if (keysym == KEY_SHIFT)
-		data->is_pressed_shift = false;
-	return (0);
-}
-
-*/
