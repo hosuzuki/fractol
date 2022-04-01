@@ -8,11 +8,12 @@
 # include <math.h>
 # include <stdio.h>
 
-# define WIDTH 1200
-# define HEIGHT 1200
-# define DEFAULT_MAX_ITER 100
-# define DEFAULT_JULIA_C_RE 0.4
-# define DEFAULT_JULIA_C_IM -0.325
+# define WIDTH 500
+# define HEIGHT 500
+//# define DEFAULT_MAX_ITER 100
+# define MAX_ITER 100
+# define DEFAULT_JULIA_C_R 0.4
+# define DEFAULT_JULIA_C_I -0.325
 
 # define MOVE_RATIO 0.02
 
@@ -36,29 +37,29 @@
 
 typedef struct s_data
 {
+	int	fract_type;
 	void	*mlx;
 	void	*win;
 	void	*img;
 //	int		cur_img;
 	char	*addr;
-	int	fract_type;
 	int	bpp;
 	int	line_len;
 	int	endian;
 	int			width;
 	int			height;
-	bool				is_pressed_shift;
-	double				max_re;
-	double				max_im;
-	double				min_re;
-	double				min_im;
-	int					max_iter;
-	double				c_re;
-	double				c_im;
-	double				z_re; //
-	double				z_im;
-	double				delta_re;
-	double				delta_im;
+	bool				shift_on;
+	double				max_r;
+	double				max_i;
+	double				min_r;
+	double				min_i;
+//	int					max_iter; //do I need this?
+	double				c_r;
+	double				c_i;
+	double				z_r; 
+	double				z_i;
+	double				delta_r;
+	double				delta_i;
 }	t_data;
 
 //typedef int				(*t_fractal_drawer)(t_canvas *canvas);
@@ -84,13 +85,35 @@ enum e_input_type {
 	ClientMessage = 33,
 };
 
-int	key_down_hook(int keysym, t_data *data);
-int	key_up_hook(int keysym, t_data *data);
-int	mouse_hook(int button, int x, int y, t_data *data);
-int	main_loop(t_data *data);
-int	draw_mandelbrot(t_data *data);
-int	exit_and_destroy_win(t_data *data);
-uint32_t	rgb2hex(int r, int g, int b);
-uint32_t	hsv2hex(double h, double s, double v);
+// ft_init_data.c
+void	ft_init_data(t_data *data);
+
+// ft_draw_mandelbrot.c
+void	ft_my_mlx_pixel_put(t_data *data, int x, int y, int color);
+int	ft_draw_mandelbrot(t_data *data);
+unsigned int	ft_pick_color(t_data *data);
+//uint32_t	ft_pick_color(t_data *data);
+
+// ft_draw_julia.c
+int	ft_draw_julia(t_data *data);
+
+// ft_rgb_to_hex.c
+double	ft_abs_double(double val);
+unsigned int	ft_hsv_to_hex(double h, double s, double v);
+unsigned int	ft_rgb_to_hex(int r, int g, int b);
+//uint32_t	rgb2hex(int r, int g, int b);
+//uint32_t	hsv2hex(double h, double s, double v);
+
+// ft_key_down_hook.c
+int	ft_destroy_win_and_exit(t_data *data);
+int	ft_key_down_hook(int keysym, t_data *data);
+int	ft_key_up_hook(int keysym, t_data *data);
+
+// ft_mouse_hook.c
+int	ft_mouse_hook(int button, int x, int y, t_data *data);
+
+// ft_draw_burnigship_bonus.c
+int	ft_draw_burningship(t_data *data);
+
 
 #endif
