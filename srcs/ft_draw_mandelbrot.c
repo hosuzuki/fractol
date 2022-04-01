@@ -30,27 +30,31 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 }
 */
 
-uint32_t	ft_get_color(t_data data, int x, int y)
+//uint32_t	ft_get_color(t_data data, int x, int y)
+unsigned int	ft_get_color(t_data data, int x, int y)
 {
 	return (*(uint32_t *)(data.addr
 		+ (y * data.line_len + x * (data.bpp / 8))));
 }
 
-uint32_t	ft_pick_color(t_data *data)
+//uint32_t	ft_pick_color(t_data *data)
+unsigned int	ft_pick_color(t_data *data)
 {
 	int		i;
 	int		color;
-	double	tmp_x;
+	double	tmp_r;
 
 	i = 0;
 	while (data->z_r * data->z_r + data->z_i * data->z_i <= 4
 //		&& i < data->max_iter)
 		&& i < MAX_ITER)
 	{
-		tmp_x = data->z_r * data->z_r	- data->z_i * data->z_i + data->c_r;
-		// ??
+		tmp_r = data->z_r * data->z_r	- data->z_i * data->z_i + data->c_r;
+ //   (a + bj)^2 = a^2 + 2abj - b^2
+		// a^2 - b^2 in this part. 
 		data->z_i = 2 * data->z_r * data->z_i + data->c_i;
-		data->z_r = tmp_x;
+		// 2abj in this part.
+		data->z_r = tmp_r;
 		i++;
 	}
 //	if (i == data->max_iter)
@@ -86,8 +90,9 @@ int	ft_draw_mandelbrot(t_data *data)
 		x = 0;
 		while (x < WIDTH)
 		{
-			data->c_i = data->min_i + y * data->delta_i;
 			data->c_r = data->min_r + x * data->delta_r;
+			//from left top on the width, but in min-max scale;
+			data->c_i = data->min_i + y * data->delta_i;
 			data->z_r = 0;
 			data->z_i = 0;
 			ft_my_mlx_pixel_put(data, x, y, ft_pick_color(data));
