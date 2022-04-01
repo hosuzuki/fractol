@@ -8,10 +8,10 @@
 # include <math.h>
 # include <stdio.h>
 
-# define WIDTH 500
-# define HEIGHT 500
+# define WIDTH 300
+# define HEIGHT 300
 //# define DEFAULT_MAX_ITER 100
-# define MAX_ITER 100
+# define MAX_ITER 150
 # define DEFAULT_JULIA_C_R 0.4
 # define DEFAULT_JULIA_C_I -0.325
 
