@@ -14,9 +14,8 @@ SRC = ./srcs/main.c \
 			./srcs/ft_rgb_to_hex.c \
 			./srcs/ft_draw_burningship_bonus.c 
 
-#BONUS_SRC = ./srcs/main_bonus.c
-#			./srcs/ft_draw_burningship_bonus.c 
-
+BONUS_SRC = ./srcs/main_bonus.c
+			./srcs/ft_draw_burningship_bonus.c 
 
 GREEN = \033[0;32m
 #RED = \033[0;31m
