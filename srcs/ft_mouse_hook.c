@@ -11,7 +11,7 @@ static void	ft_zoom_image(t_data *data, int button, double x, double y)
 	double	y_cp;
 	double	itp;
 
-	itp = 0.0;
+//	itp = 0.0;
 	x_cp = x	/ (WIDTH / (data->max_r - data->min_r)) + data->min_r;
 	// get x in 2 x 2 complex plane
 	y_cp = y	/ (HEIGHT / (data->max_i - data->min_i)) + data->min_i;
@@ -21,7 +21,8 @@ static void	ft_zoom_image(t_data *data, int button, double x, double y)
 //			data->max_iter -= 4;
 		itp = 1.0 / 0.8;
 	}
-	else if (button == SCROLL_DOWN)
+//	else if (button == SCROLL_DOWN)
+	else
 	{
 //		data->max_iter += 4;
 		itp = 1.0 / 1.2;
@@ -34,7 +35,7 @@ static void	ft_zoom_image(t_data *data, int button, double x, double y)
 
 int	ft_mouse_hook(int button, int x, int y, t_data *data)
 {
-	ft_printf("button: %d\n", button);
+//	ft_printf("button: %d\n", button);
 	if (button == SCROLL_UP || button == SCROLL_DOWN)
 		ft_zoom_image(data, button, (double)x, (double)y);
 	return (0);

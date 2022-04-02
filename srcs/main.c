@@ -8,21 +8,21 @@ void	ft_update_fractal(t_data *data)
 	double	y_cp;
 
 	mlx_mouse_get_pos(data->mlx, data->win, &x, &y);
-	if (!x && !y)
+//	if (!x && !y)
+	if (!x || !y)
 		return ;
-	x_cp = (double)x / (WIDTH / (data->max_r - data->min_r)) + data->min_r;
-	y_cp = (double)y / (HEIGHT / (data->max_i - data->min_i)) * -1 + data->max_i;
+//	x_cp = (double)x / (WIDTH / (data->max_r - data->min_r)) + data->min_r;
+//	y_cp = (double)y / (HEIGHT / (data->max_i - data->min_i)) * -1 + data->max_i;
+	x_cp = ((data->max_r - data->min_r) * (double)x) / WIDTH + data->min_r;
+	y_cp = ((data->max_i - data->min_i) * (double)y) / HEIGHT + data->min_i; // don't i need -1?
 	data->c_r = x_cp;
 	data->c_i = y_cp;
 }
 
 int	ft_render(t_data *data)
 {
-	if (data->shift_on)
-	{
-		printf("update_fractal\n");
+	if (data->shift_on && data->fract_type == JULIA)
 		ft_update_fractal(data);
-	}
 	if (data->fract_type == MANDELBROT)
 		ft_draw_mandelbrot(data);
 	else if (data->fract_type == JULIA)
@@ -71,4 +71,5 @@ int	main(int argc, char **argv)
 //	data.win = NULL;
 	mlx_destroy_display(data.mlx);
 //	ft_free_all(&data);
+	return (0);
 }
