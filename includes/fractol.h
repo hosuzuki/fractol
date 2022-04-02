@@ -11,8 +11,8 @@
 # define WIDTH 300
 # define HEIGHT 300
 //# define DEFAULT_MAX_ITER 100
-# define MAX_ITER 150
-# define DEFAULT_JULIA_C_R 0.4
+# define MAX_ITER 100
+# define DEFAULT_JULIA_C_R -1
 # define DEFAULT_JULIA_C_I -0.325
 
 # define MOVE_RATIO 0.02
@@ -22,7 +22,7 @@
 # define BLUE_PIXEL 0x000000FF
 # define WHITE_PIXEL 0x00FFFFFF
 
-# define KEY_Q 113
+//# define KEY_Q 113
 # define KEY_ESC 65307
 # define KEY_SHIFT 65505
 # define KEY_L_ARROW 65361
@@ -31,9 +31,11 @@
 # define KEY_DW_ARROW 65364
 # define SCROLL_UP 5
 # define SCROLL_DOWN 4
-# define MOUSE_RIGHT 1
+
+/*#define MOUSE_RIGHT 1
 # define MOUSE_CENTER 2
 # define MOUSE_LEFT 3
+*/
 
 typedef struct s_data
 {
@@ -46,12 +48,12 @@ typedef struct s_data
 	int	bpp;
 	int	line_len;
 	int	endian;
-	int			width;
-	int			height;
+//	int			width;
+//	int			height;
 	bool				shift_on;
 	double				max_r;
-	double				max_i;
 	double				min_r;
+	double				max_i;
 	double				min_i;
 //	int					max_iter; //do I need this?
 	double				c_r;
@@ -62,26 +64,20 @@ typedef struct s_data
 	double				delta_i;
 }	t_data;
 
-//typedef int				(*t_fractal_drawer)(t_canvas *canvas);
-
-//typedef struct	s_math 
-//	t_fractal_drawer	fractal_drawer;
-//} t_math;
-
 enum e_fractal_type {
-	JULIA,
 	MANDELBROT,
+	JULIA,
 	BURNINGSHIP,
 };
 
 enum e_input_type {
 	KEYDOWN = 2,
 	KEYUP = 3,
-	ON_MOUSEDOWN = 4,
-	ON_MOUSEUP = 5,
-	ON_MOUSEMOVE = 6,
-	ON_EXPOSE = 12,
-	ON_DESTROY = 17,
+//	ON_MOUSEDOWN = 4,
+//	ON_MOUSEUP = 5,
+//	ON_MOUSEMOVE = 6,
+//	ON_EXPOSE = 12,
+//	ON_DESTROY = 17,
 	ClientMessage = 33,
 };
 
