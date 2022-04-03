@@ -1,6 +1,6 @@
 #include "fractol.h"
 
-double	ft_abs_double(double val)
+double	ft_abs(double val)
 {
 	if (val < 0)
 		return (-val);
@@ -11,8 +11,9 @@ double	ft_abs_double(double val)
  * h: Hue.  [0-360]
  * s: Saturation(Chroma) [0-1]
  * v: Value(Brightness) [0-1]
- */
 //uint32_t	ft_hsv_to_hex(double h, double s, double v)
+*/
+
 unsigned int	ft_hsv_to_hex(double h, double s, double v)
 {
 	double	c;
@@ -20,7 +21,7 @@ unsigned int	ft_hsv_to_hex(double h, double s, double v)
 	double	m;
 
 	c = v * s;
-	x = c * (1 - ft_abs_double(((int)h / 60 % 2) - 1));
+	x = c * (1 - ft_abs(((int)h / 60 % 2) - 1));
 	m = v - c;
 	if (s == 0)
 		return (ft_rgb_to_hex((v + m) * 255, (v + m) * 255, (v + m) * 255));
@@ -38,6 +39,16 @@ unsigned int	ft_hsv_to_hex(double h, double s, double v)
 		return (ft_rgb_to_hex((c + m) * 255, (x + m) * 255, (0 + m) * 255));
 	else
 		return (ft_rgb_to_hex((0 + m) * 255, (0 + m) * 255, (0 + m) * 255));
+}
+
+unsigned int ft_gradation(double i, double pow)
+{
+	if (pow < 5)
+		return (ft_rgb_to_hex(i * 255, i * 255, 0));
+	else if (pow < 7)
+		return (ft_rgb_to_hex(0, i * 255, 0));
+	else
+		return (ft_rgb_to_hex(i * 255, 0, 0));
 }
 
 //uint32_t	ft_rgb_to_hex(int r, int g, int b)

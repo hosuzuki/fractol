@@ -12,7 +12,7 @@ static unsigned int	ft_pick_color_bs(t_data *data)
 //		&& i < data->max_iter)
 	{
 		tmp_r = pow(data->z_r, 2.0) - pow(data->z_i, 2.0)  + data->c_r;
-		data->z_i = ft_abs_double(2 * data->z_r * data->z_i) + data->c_i;
+		data->z_i = ft_abs(2 * data->z_r * data->z_i) + data->c_i;
 		data->z_r = tmp_r;
 		i++;
 	}
@@ -20,7 +20,8 @@ static unsigned int	ft_pick_color_bs(t_data *data)
 	if (i == MAX_ITER)
 		color = ft_rgb_to_hex(0, 0, 0);
 	else
-		color = ft_hsv_to_hex(i % 360, (double)i / MAX_ITER, ((double)i / MAX_ITER));
+		color = ft_gradation((double)i / MAX_ITER, pow(data->z_r, 2.0));
+//		color = ft_hsv_to_hex(i % 360, (double)i / MAX_ITER, ((double)i / MAX_ITER));
 //		color = ft_hsv_to_hex(i % 360, (double)i / data->max_iter, ((double)i / data->max_iter));
 	return (color);
 }
