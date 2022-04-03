@@ -20,7 +20,6 @@ void	ft_update_fractal(t_data *data)
 		return ;
 	x_cp = ((data->max_r - data->min_r) * (double)x) / WIDTH + data->min_r;
 	y_cp = ((data->max_i - data->min_i) * (double)y) / HEIGHT + data->min_i;
-	printf("x: %f, y: %f\n", x_cp, y_cp);
 	data->c_r = x_cp;
 	data->c_i = y_cp;
 }
