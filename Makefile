@@ -3,6 +3,7 @@ CC = gcc
 FLAGS = -Wall -Werror -Wextra 
 LIB = ./libft/libft.a
 MLX = ./minilibx-linux/libmlx.a
+MLX_PATH := ./minilibx-linux
 LIBRARIES = -L/usr/X11R6/lib  -lmlx -lX11 -lXext -framework OpenGL -framework AppKit -L ./minilibx-linux/
 #-L ./libft/ -L ./minilibx-linux/
 SRC = ./srcs/main.c \
@@ -11,14 +12,18 @@ SRC = ./srcs/main.c \
 			./srcs/ft_draw_julia.c \
 			./srcs/ft_key_down_hook.c \
 			./srcs/ft_mouse_hook.c \
+			./srcs/ft_rgb_to_hex.c
+
+BONUS_SRC = ./srcs/main_bonus.c \
+			./srcs/ft_init_data.c \
+			./srcs/ft_draw_mandelbrot.c \
+			./srcs/ft_draw_julia.c \
+			./srcs/ft_key_down_hook.c \
+			./srcs/ft_mouse_hook.c \
 			./srcs/ft_rgb_to_hex.c \
 			./srcs/ft_draw_burningship_bonus.c 
 
-BONUS_SRC = ./srcs/main_bonus.c
-			./srcs/ft_draw_burningship_bonus.c 
-
 GREEN = \033[0;32m
-#RED = \033[0;31m
 RESET = \033[0m
 OBJ = $(SRC:.c=.o)
 BONUS_OBJ = $(BONUS_SRC:.c=.o)
@@ -26,17 +31,20 @@ HEAD = -I ./includes/
 RM = rm -f
 
 ifdef BONUS_ON
-#NAME = $(BONUS_NAME)
 SRC = $(BONUS_SRC)
 OBJ = $(BONUS_OBJ)
 endif
 
 all : $(NAME)
 
-$(NAME) : $(LIB) $(MLX) $(OBJ)
+$(NAME) : $(LIB) $(MLX_PATH) $(MLX) $(OBJ)
 	$(CC) $(FLAGS) $(OBJ) $(LIBRARIES) $(LIB) $(MLX) -o $(NAME)
 	@echo "$(NAME): $(GREEN)object files were created$(RESET)"
 	@echo "$(NAME): $(GREEN)$(NAME) was created$(RESET)"
+
+#$(MLX_PATH) :
+#	git clone https://github.com/42Paris/minilibx-linux.git $(MLX_PATH)
+#	make -C $(MLX_PATH)
 
 .c.o :
 	$(CC) $(FLAGS) -c $< -o $(<:.c=.o) $(HEAD)
@@ -57,12 +65,13 @@ clean :
 fclean : clean
 	$(MAKE) fclean -sC ./libft
 	$(MAKE) clean -sC ./minilibx-linux
-	$(RM) $(NAME) $(BONUS_NAME)
+	$(RM) $(NAME)
 	@echo "$(NAME): $(GREEN)$(NAME) was deleted$(RESET)"
 
 re : fclean all
 
-bonus : fclean
+bonus :
+#	$(RM) $(NAME)
 	$(MAKE) BONUS_ON=1
 
 .PHONY: all clean fclean re bonus
