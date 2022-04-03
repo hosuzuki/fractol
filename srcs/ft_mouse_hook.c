@@ -7,38 +7,31 @@ static double	ft_intrpl(double start, double end, double itp)
 }
 */
 
-
-static void ft_translation(t_data *data)
+static void ft_translation_back(t_data *data, double x_cp, double y_cp)
 {
-	
-
-static void ft_scale(t_data *data)
-{
-	
-
-
-static void	ft_zoom_image(t_data *data, int button, double x, double y)
-{
-	double	x_cp;
-	double	y_cp;
-
-	x_cp = ((data->max_r - data->min_r) * x) / WIDTH + data->min_r;
-	y_cp = ((data->max_i - data->min_i) * y) / HEIGHT + data->min_i; 
-	if (button == SCROLL_DOWN)
-	{
-		data->min_i = (data->min_i - x_cp) / ZOOM_IN_RATIO;
-		data->max_i = (data->max_i - x_cp) / ZOOM_IN_RATIO;
-		data->min_r = (data->min_i - x_cp) / ZOOM_IN_RATIO;
-		data->max_r = (data->max_i - x_cp) / ZOOM_IN_RATIO;
-	}
-	else
-	{
-		data->min_i = (data->min_i - x_cp) / ZOOM_OUT_RATIO;
-		data->max_i = (data->max_i - x_cp) / ZOOM_OUT_RATIO;
-		data->min_r = (data->min_i - x_cp) / ZOOM_OUT_RATIO;
-		data->max_r = (data->max_i - x_cp) / ZOOM_OUT_RATIO;
-	}
+	data->min_r = data->min_r + x_cp;
+	data->max_r = data->max_r + x_cp;
+	data->min_i = data->min_i + y_cp;
+	data->max_i = data->max_i + y_cp;
 }
+
+static void ft_translation_to_zero(t_data *data, double x_cp, double y_cp)
+{
+	data->min_r = data->min_r - x_cp;
+	data->max_r = data->max_r - x_cp;
+	data->min_i = data->min_i - y_cp;
+	data->max_i = data->max_i - y_cp;
+}
+
+static void ft_scale(t_data *data, double ratio)
+{
+	data->min_r = data->min_r * ratio;
+	data->max_r = data->max_r * ratio;
+	data->min_i = data->min_i * ratio;
+	data->max_i = data->max_i * ratio;
+}
+
+
 
 /*
 static void	ft_zoom_image(t_data *data, int button, double x, double y)
@@ -74,8 +67,19 @@ static void	ft_zoom_image(t_data *data, int button, double x, double y)
 
 int	ft_mouse_hook(int button, int x, int y, t_data *data)
 {
+	double	x_cp;
+	double	y_cp;
 //	ft_printf("button: %d\n", button);
 	if (button == SCROLL_UP || button == SCROLL_DOWN)
-		ft_zoom_image(data, button, (double)x, (double)y);
+	{
+		x_cp = ((data->max_r - data->min_r) * (double)x) / WIDTH + data->min_r;
+		y_cp = ((data->max_i - data->min_i) * (double)y) / HEIGHT + data->min_i; 
+		ft_translation_to_zero(data, x_cp, y_cp);
+		if (button == SCROLL_DOWN)
+			ft_scale(data, ZOOM_IN_RATIO);
+		else
+			ft_scale(data, ZOOM_OUT_RATIO);
+		ft_translation_back(data, x_cp, y_cp);
+	}
 	return (0);
 }
