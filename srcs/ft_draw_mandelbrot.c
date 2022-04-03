@@ -30,12 +30,14 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 }
 */
 
+/*
 //uint32_t	ft_get_color(t_data data, int x, int y)
 unsigned int	ft_get_color(t_data data, int x, int y)
 {
 	return (*(uint32_t *)(data.addr
 		+ (y * data.line_len + x * (data.bpp / 8))));
 }
+*/
 
 //uint32_t	ft_pick_color(t_data *data)
 unsigned int	ft_pick_color(t_data *data)
