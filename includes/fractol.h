@@ -16,6 +16,8 @@
 # define DEFAULT_JULIA_C_I -0.325
 
 # define MOVE_RATIO 0.02
+# define ZOOM_IN_RATIO 0.8
+# define ZOOM_OUT_RATIO 1.2
 
 # define RED_PIXEL 0x00FF0000
 # define GREEN_PIXEL 0x0000FF00
