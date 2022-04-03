@@ -1,19 +1,12 @@
 #include "fractol.h"
-/*
- * Draw the Julia set.
- * The Julia set is the set that does not diverge when z_n = z_(n-1) + C.
- * C is a complex constant (the same number is used for all pixels).
- * Z_0 is the position of the pixel to be drawn.
- * If divergence occurs, it is filled with black.
-*/
 
 int	ft_draw_julia(t_data *data)
 {
 	int	x;
 	int	y;
 
-	data->delta_r = (data->max_r - data->min_r) / (WIDTH - 1);
-	data->delta_i = (data->max_i - data->min_i) / (HEIGHT - 1);
+	data->delta_r = (data->max_r - data->min_r) / WIDTH;
+	data->delta_i = (data->max_i - data->min_i) /HEIGHT;
 	y = 0;
 	while (y < HEIGHT)
 	{

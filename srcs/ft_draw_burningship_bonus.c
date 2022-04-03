@@ -1,4 +1,11 @@
-#include "fractol.h"
+#include "fractol_bonus.h"
+
+void end(void)__attribute__((destructor));
+
+void end(void)
+{
+    system("leaks fractol");
+}
 
 static unsigned int	ft_pick_color_bs(t_data *data)
 //static uint32_t	get_color_in_burningship(t_data *data)
@@ -18,7 +25,7 @@ static unsigned int	ft_pick_color_bs(t_data *data)
 	}
 //	if (i == data->max_iter)
 	if (i == MAX_ITER)
-		color = ft_rgb_to_hex(0, 0, 0);
+		color = ft_rgb_to_hex(255, 255, 255);
 	else
 		color = ft_gradation((double)i / MAX_ITER, pow(data->z_r, 2.0));
 //		color = ft_hsv_to_hex(i % 360, (double)i / MAX_ITER, ((double)i / MAX_ITER));
@@ -45,8 +52,8 @@ int	ft_draw_burningship(t_data *data)
 	int	x;
 	int	y;
 
-	data->delta_r = (data->max_r - data->min_r) / (WIDTH - 1);
-	data->delta_i = (data->max_i - data->min_i) / (HEIGHT - 1);
+	data->delta_r = (data->max_r - data->min_r) / WIDTH;
+	data->delta_i = (data->max_i - data->min_i) / HEIGHT;
 	y = 0;
 	while (y < HEIGHT)
 	{

@@ -1,5 +1,12 @@
 #include "fractol.h"
 
+void end(void)__attribute__((destructor));
+
+void end(void)
+{
+    system("leaks fractol");
+}
+
 void	ft_update_fractal(t_data *data)
 {
 	int		x;
@@ -8,13 +15,12 @@ void	ft_update_fractal(t_data *data)
 	double	y_cp;
 
 	mlx_mouse_get_pos(data->mlx, data->win, &x, &y);
-//	if (!x && !y)
+	//	if (!x && !y)
 	if (!x || !y)
 		return ;
-//	x_cp = (double)x / (WIDTH / (data->max_r - data->min_r)) + data->min_r;
-//	y_cp = (double)y / (HEIGHT / (data->max_i - data->min_i)) * -1 + data->max_i;
 	x_cp = ((data->max_r - data->min_r) * (double)x) / WIDTH + data->min_r;
-	y_cp = ((data->max_i - data->min_i) * (double)y) / HEIGHT + data->min_i; // don't i need -1?
+	y_cp = ((data->max_i - data->min_i) * (double)y) / HEIGHT + data->min_i;
+	printf("x: %f, y: %f\n", x_cp, y_cp);
 	data->c_r = x_cp;
 	data->c_i = y_cp;
 }
@@ -27,8 +33,6 @@ int	ft_render(t_data *data)
 		ft_draw_mandelbrot(data);
 	else if (data->fract_type == JULIA)
 		ft_draw_julia(data);
-	else if (data->fract_type == BURNINGSHIP)
-		ft_draw_burningship(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
 	return (0);
 }
@@ -39,8 +43,6 @@ int	select_fractal(t_data *data, char *str)
 		data->fract_type = MANDELBROT;
 	else if (!ft_strncmp(str, "julia", 6))
 		data->fract_type = JULIA;
-	else if (!ft_strncmp(str, "burningship", 12))
-		data->fract_type = BURNINGSHIP;
 	else
 		return (false);
 	return (true);
@@ -55,13 +57,12 @@ int	main(int argc, char **argv)
 		ft_printf("Please input one of fractal types below after ./fractol\n");
 		ft_printf("- mandelbrot\n");
 		ft_printf("- julia\n");
-		ft_printf("- burningship\n");
 		return (1);
 	}
 	ft_init_data(&data);
 	mlx_loop_hook(data.mlx, &ft_render, &data);
-	mlx_hook(data.win, KEYDOWN, 1L<<0, ft_key_down_hook, &data);
-	mlx_hook(data.win, KEYUP, 1L<<1, ft_key_up_hook, &data);
+	mlx_hook(data.win, KEYDOWN, 1L << 0, ft_key_down_hook, &data);
+	mlx_hook(data.win, KEYUP, 1L << 1, ft_key_up_hook, &data);
 	mlx_hook(data.win, ClientMessage, 1L << 17, ft_destroy_win_and_exit, &data);
 	mlx_mouse_hook(data.win, ft_mouse_hook, &data);
 	mlx_loop(data.mlx);

@@ -31,7 +31,7 @@ int	ft_destroy_win_and_exit(t_data *data)
 //	mlx_destroy_image(data.mlx, data.img);
 	mlx_destroy_window(data->mlx, data->win);
 //	mlx_destroy_display(data.mlx);
-	exit(0);
+	exit (0);
 }
 
 int	ft_key_up_hook(int keysym, t_data *data)
