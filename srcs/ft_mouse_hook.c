@@ -7,6 +7,16 @@ static double	ft_intrpl(double start, double end, double itp)
 }
 */
 
+
+static void ft_translation(t_data *data)
+{
+	
+
+static void ft_scale(t_data *data)
+{
+	
+
+
 static void	ft_zoom_image(t_data *data, int button, double x, double y)
 {
 	double	x_cp;
