@@ -7,14 +7,14 @@ static unsigned int	ft_pick_color_bs(t_data *data)
 {
 	int		i;
 	int		color;
-	long double	tmp_r;
+	double	tmp_r;
 
 	i = 0;
 //	while (pow(data->z_r, 2.0) + pow(data->z_i, 2.0)  <= 4 && i < data->max_iter)
 	while (pow(data->z_r, 2.0) + pow(data->z_i, 2.0)  <= 4 && i < MAX_ITER)
 	{
 		tmp_r = pow(data->z_r, 2.0) - pow(data->z_i, 2.0)  + data->c_r;
-		data->z_i = ft_abs(2 * data->z_r * data->z_i) + data->c_i;
+		data->z_i = fabs(2 * (double)data->z_r * (double)data->z_i) + data->c_i;
 		data->z_r = tmp_r;
 		i++;
 	}
@@ -22,7 +22,7 @@ static unsigned int	ft_pick_color_bs(t_data *data)
 	if (i == MAX_ITER)
 		color = ft_rgb_to_hex(255, 255, 255);
 	else
-		color = ft_gradation((long double)i / (long double)MAX_ITER, pow(data->z_r, 2.0));
+		color = ft_gradation((double)i / (double)MAX_ITER, pow(data->z_r, 2.0));
 //		color = ft_gradation((double)i / data->max_iter, pow(data->z_r, 2.0));
 //		color = ft_hsv_to_hex(i % 360, (double)i / MAX_ITER, ((double)i / MAX_ITER));
 //		color = ft_hsv_to_hex(i % 360, (double)i / data->max_iter, ((double)i / data->max_iter));
@@ -48,8 +48,8 @@ int	ft_draw_burningship(t_data *data)
 	int	x;
 	int	y;
 
-	data->delta_r = (data->max_r - data->min_r) / (long double)WIDTH;
-	data->delta_i = (data->max_i - data->min_i) / (long double)HEIGHT;
+	data->delta_r = (data->max_r - data->min_r) / (double)WIDTH;
+	data->delta_i = (data->max_i - data->min_i) / (double)HEIGHT;
 	y = 0;
 	while (y < HEIGHT)
 	{

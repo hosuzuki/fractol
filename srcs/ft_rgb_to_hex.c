@@ -1,12 +1,12 @@
 #include "fractol.h"
 
-long double	ft_abs(long double val)
+/*double	ft_abs(double val)
 {
 	if (val < 0)
 		return (-val);
 	return (val);
 }
-
+*/
 /*
  * h: Hue.  [0-360]
  * s: Saturation(Chroma) [0-1]
@@ -43,8 +43,7 @@ unsigned int	ft_hsv_to_hex(double h, double s, double v)
 }
 */
 
-
-unsigned int ft_gradation(long double i, long double pow)
+unsigned int ft_gradation(double i, double pow)
 {
 	if (pow < 5)
 		return (ft_rgb_to_hex(i * 255.0, i * 255.0, 0));

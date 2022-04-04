@@ -44,7 +44,7 @@ unsigned int	ft_pick_color(t_data *data)
 {
 	int		i;
 	int		color;
-	long double	tmp_r;
+	double	tmp_r;
 
 	i = 0;
 	while (pow(data->z_r, 2.0) + pow(data->z_i, 2.0) <= 4 && i < MAX_ITER)
@@ -63,7 +63,7 @@ unsigned int	ft_pick_color(t_data *data)
 	if (i == MAX_ITER)
 		color = ft_rgb_to_hex(255, 255, 255);
 	else
-		color = ft_gradation((long double)i / (long double)MAX_ITER, pow(data->z_r, 2.0));
+		color = ft_gradation((double)i / (double)MAX_ITER, pow(data->z_r, 2.0));
 //		color = ft_gradation((double)i / data->max_iter, pow(data->z_r, 2.0));
 		//		color = ft_hsv_to_hex(i % 360, (double)i / MAX_ITER, ((double)i / MAX_ITER));
 	return (color);
@@ -86,8 +86,8 @@ int	ft_draw_mandelbrot(t_data *data)
 	int	x;
 	int	y;
 
-	data->delta_r = (data->max_r - data->min_r) / (long double)WIDTH;
-	data->delta_i = (data->max_i - data->min_i) / (long double)HEIGHT;
+	data->delta_r = (data->max_r - data->min_r) / (double)WIDTH;
+	data->delta_i = (data->max_i - data->min_i) / (double)HEIGHT;
 //	data->delta_r = (data->max_r - data->min_r) / (WIDTH - 1);
 //	data->delta_i = (data->max_i - data->min_i) / (HEIGHT - 1);
 	y = 0;

@@ -12,15 +12,15 @@ void	ft_update_fractal(t_data *data)
 {
 	int		x;
 	int		y;
-	long double	x_cp;
-	long double	y_cp;
+	double	x_cp;
+	double	y_cp;
 
 	mlx_mouse_get_pos(data->mlx, data->win, &x, &y);
 	//	if (!x && !y)
 	if (!x || !y)
 		return ;
-	x_cp = ((data->max_r - data->min_r) * (long double)x) / (long double)WIDTH + data->min_r;
-	y_cp = ((data->max_i - data->min_i) * (long double)y) / (long double)HEIGHT + data->min_i;
+	x_cp = ((data->max_r - data->min_r) * (double)x) / (double)WIDTH + data->min_r;
+	y_cp = ((data->max_i - data->min_i) * (double)y) / (double)HEIGHT + data->min_i;
 	data->c_r = x_cp;
 	data->c_i = y_cp;
 }
