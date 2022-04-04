@@ -5,8 +5,8 @@ int	ft_draw_julia(t_data *data)
 	int	x;
 	int	y;
 
-	data->delta_r = (data->max_r - data->min_r) / WIDTH;
-	data->delta_i = (data->max_i - data->min_i) /HEIGHT;
+	data->delta_r = (data->max_r - data->min_r) / (long double)WIDTH;
+	data->delta_i = (data->max_i - data->min_i) /(long double)HEIGHT;
 	y = 0;
 	while (y < HEIGHT)
 	{

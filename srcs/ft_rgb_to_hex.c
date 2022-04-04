@@ -1,6 +1,6 @@
 #include "fractol.h"
 
-double	ft_abs(double val)
+long double	ft_abs(long double val)
 {
 	if (val < 0)
 		return (-val);
@@ -14,6 +14,7 @@ double	ft_abs(double val)
 //uint32_t	ft_hsv_to_hex(double h, double s, double v)
 */
 
+/*
 unsigned int	ft_hsv_to_hex(double h, double s, double v)
 {
 	double	c;
@@ -40,15 +41,17 @@ unsigned int	ft_hsv_to_hex(double h, double s, double v)
 	else
 		return (ft_rgb_to_hex((0 + m) * 255, (0 + m) * 255, (0 + m) * 255));
 }
+*/
 
-unsigned int ft_gradation(double i, double pow)
+
+unsigned int ft_gradation(long double i, long double pow)
 {
 	if (pow < 5)
-		return (ft_rgb_to_hex(i * 255, i * 255, 0));
+		return (ft_rgb_to_hex(i * 255.0, i * 255.0, 0));
 	else if (pow < 7)
-		return (ft_rgb_to_hex(0, i * 255, 0));
+		return (ft_rgb_to_hex(0, i * 255.0, 0));
 	else
-		return (ft_rgb_to_hex(i * 255, 0, 0));
+		return (ft_rgb_to_hex(i * 255.0, 0, 0));
 }
 
 //uint32_t	ft_rgb_to_hex(int r, int g, int b)
