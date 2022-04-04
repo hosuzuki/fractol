@@ -11,6 +11,7 @@
 # define WIDTH 300
 # define HEIGHT 300
 # define MAX_ITER 200
+//# define DEFAULT_MAX_ITER 200
 # define DEFAULT_JULIA_C_R -0.74667
 # define DEFAULT_JULIA_C_I 0.186667
 
@@ -30,9 +31,9 @@
 # define KEY_UP_ARROW 65362
 # define KEY_R_ARROW 65363
 # define KEY_DW_ARROW 65364
-# define SCROLL_UP 5
-# define SCROLL_DOWN 4
-
+# define KEY_ALT 65406
+# define SCROLL_UP 4
+# define SCROLL_DOWN 5
 /*#define MOUSE_RIGHT 1
 # define MOUSE_CENTER 2
 # define MOUSE_LEFT 3
@@ -92,8 +93,8 @@ unsigned int	ft_pick_color(t_data *data);
 int				ft_draw_julia(t_data *data);
 
 // ft_rgb_to_hex.c
-double			ft_abs(double val);
-unsigned int	ft_hsv_to_hex(double h, double s, double v);
+//double			ft_abs(double val);
+//unsigned int	ft_hsv_to_hex(double h, double s, double v);
 unsigned int	ft_rgb_to_hex(int r, int g, int b);
 //uint32_t	rgb2hex(int r, int g, int b);
 //uint32_t	hsv2hex(double h, double s, double v);
