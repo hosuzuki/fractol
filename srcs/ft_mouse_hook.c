@@ -71,7 +71,6 @@ int	ft_mouse_hook(int button, int x, int y, t_data *data)
 //	ft_printf("button: %d\n", button);
 	if (button == SCROLL_UP || button == SCROLL_DOWN)
 	{
-		printf("%d\n", button);
 		x_cp = ((data->max_r - data->min_r) * (double)x) / (double)WIDTH + data->min_r;
 		y_cp = ((data->max_i - data->min_i) * (double)y) / (double)HEIGHT + data->min_i; 
 		ft_translation_to_zero(data, x_cp, y_cp);

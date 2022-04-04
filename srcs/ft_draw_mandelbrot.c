@@ -61,7 +61,7 @@ unsigned int	ft_pick_color(t_data *data)
 	}
 //	if (i == data->max_iter)
 	if (i == MAX_ITER)
-		color = ft_rgb_to_hex(255, 255, 255);
+		color = ft_rgb_to_hex(255, 26, 186);
 	else
 		color = ft_gradation((double)i / (double)MAX_ITER, pow(data->z_r, 2.0));
 //		color = ft_gradation((double)i / data->max_iter, pow(data->z_r, 2.0));
