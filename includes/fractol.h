@@ -100,11 +100,11 @@ int				ft_draw_julia(t_data *data);
 
 // ft_rgb_to_hex.c
 //double			ft_abs(double val);
-unsigned int	ft_hsv_to_hex(double h, double s, double v);
+//unsigned int	ft_hsv_to_hex(double h, double s, double v);
 unsigned int	ft_rgb_to_hex(int r, int g, int b);
 //uint32_t	rgb2hex(int r, int g, int b);
 //uint32_t	hsv2hex(double h, double s, double v);
-unsigned int	ft_gradation(t_data *data, double i);
+unsigned int	ft_gradation(t_data *data, double i, double z_r);
 
 // ft_key_down_hook.c
 int				ft_destroy_win_and_exit(t_data *data);
