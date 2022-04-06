@@ -1,5 +1,58 @@
 #include "fractol.h"
 
+//uint32_t	ft_rgb_to_hex(int r, int g, int b)
+unsigned int	ft_rgb_to_hex(int r, int g, int b)
+{
+//	uint32_t	color;
+	unsigned int	color;
+
+	color = 0;
+	color |= b;
+	color |= g << 8;
+	color |= r << 16;
+	return (color);
+}
+
+unsigned int ft_gradation(t_data *data, double i)
+{
+	if	(data->color_theme == YELLOW)
+	{
+		if (0.5 < i)
+			return (ft_rgb_to_hex(i * 255.0, i * 255.0, 0));
+		else 
+			return (ft_rgb_to_hex(i * 255.0, 0, 0));
+	}
+	else if 	(data->color_theme == RED)
+	{
+		if (0.5 < i)
+			return (ft_rgb_to_hex(i * 255.0, 0, 0));
+		else 
+		return (ft_rgb_to_hex(0, i * 255.0, 0));
+	}
+	else
+	{
+		if (0.5 < i)
+			return (ft_rgb_to_hex(0, i * 255.0, 0));
+		else
+			return (ft_rgb_to_hex(i * 255.0, i * 255.0, 0));
+	}
+		//	else 
+//		return (ft_rgb_to_hex(0, 0, i * 255.0));
+}
+
+
+/*
+ 	(void)pow;
+	if (pow < 5)
+	{
+		return (ft_rgb_to_hex(i * 255.0, i * 255.0, 0));
+	else if (pow < 7)
+		return (ft_rgb_to_hex(0, i * 255.0, 0));
+	else
+		return (ft_rgb_to_hex(i * 255.0, 0, 0));
+}
+
+*/
 /*double	ft_abs(double val)
 {
 	if (val < 0)
@@ -14,7 +67,6 @@
 //uint32_t	ft_hsv_to_hex(double h, double s, double v)
 */
 
-/*
 unsigned int	ft_hsv_to_hex(double h, double s, double v)
 {
 	double	c;
@@ -22,7 +74,7 @@ unsigned int	ft_hsv_to_hex(double h, double s, double v)
 	double	m;
 
 	c = v * s;
-	x = c * (1 - ft_abs(((int)h / 60 % 2) - 1));
+	x = c * (1 - abs(((int)h / 60 % 2) - 1));
 	m = v - c;
 	if (s == 0)
 		return (ft_rgb_to_hex((v + m) * 255, (v + m) * 255, (v + m) * 255));
@@ -41,30 +93,7 @@ unsigned int	ft_hsv_to_hex(double h, double s, double v)
 	else
 		return (ft_rgb_to_hex((0 + m) * 255, (0 + m) * 255, (0 + m) * 255));
 }
-*/
 
-unsigned int ft_gradation(double i, double pow)
-{
-	if (pow < 5)
-		return (ft_rgb_to_hex(i * 255.0, i * 255.0, 0));
-	else if (pow < 7)
-		return (ft_rgb_to_hex(0, i * 255.0, 0));
-	else
-		return (ft_rgb_to_hex(i * 255.0, 0, 0));
-}
-
-//uint32_t	ft_rgb_to_hex(int r, int g, int b)
-unsigned int	ft_rgb_to_hex(int r, int g, int b)
-{
-//	uint32_t	color;
-	unsigned int	color;
-
-	color = 0;
-	color |= b;
-	color |= g << 8;
-	color |= r << 16;
-	return (color);
-}
 
 /*
  int rgb_to_int(double r, double g, double b)
@@ -109,4 +138,3 @@ int create_trgb(unsigned char t, unsigned char r, unsigned char g, unsigned char
 }
 
 */
-

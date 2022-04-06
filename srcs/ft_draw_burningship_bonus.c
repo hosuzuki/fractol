@@ -11,7 +11,7 @@ static unsigned int	ft_pick_color_bs(t_data *data)
 
 	i = 0;
 //	while (pow(data->z_r, 2.0) + pow(data->z_i, 2.0)  <= 4 && i < data->max_iter)
-	while (pow(data->z_r, 2.0) + pow(data->z_i, 2.0)  <= 4 && i < MAX_ITER)
+	while (pow(data->z_r, 2.0) + pow(data->z_i, 2.0)  <= 4 && i < data->max_it)
 	{
 		tmp_r = pow(data->z_r, 2.0) - pow(data->z_i, 2.0)  + data->c_r;
 		data->z_i = fabs(2 * (double)data->z_r * (double)data->z_i) + data->c_i;
@@ -19,10 +19,10 @@ static unsigned int	ft_pick_color_bs(t_data *data)
 		i++;
 	}
 //	if (i == data->max_iter)
-	if (i == MAX_ITER)
-		color = ft_rgb_to_hex(255, 255, 255);
+	if (i == data->max_it)
+		color = ft_rgb_to_hex(0, 0, 0);
 	else
-		color = ft_gradation((double)i / (double)MAX_ITER, pow(data->z_r, 2.0));
+		color = ft_gradation(data, (double)i / (double)data->max_it);
 //		color = ft_gradation((double)i / data->max_iter, pow(data->z_r, 2.0));
 //		color = ft_hsv_to_hex(i % 360, (double)i / MAX_ITER, ((double)i / MAX_ITER));
 //		color = ft_hsv_to_hex(i % 360, (double)i / data->max_iter, ((double)i / data->max_iter));

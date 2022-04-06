@@ -42,7 +42,8 @@ void	ft_init_data(t_data *data)
 	data->max_i = 2;
 	data->min_r = -2;
 	data->min_i = -2;
-//	data->max_iter = DEFAULT_MAX_ITER;
+	data->max_it = DEFAULT_MAX_ITER;
 	data->c_r = DEFAULT_JULIA_C_R;
 	data->c_i = DEFAULT_JULIA_C_I;
+	data->color_theme = YELLOW;
 }
