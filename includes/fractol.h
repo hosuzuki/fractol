@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fractol.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hokutosuzuki <hosuzuki@student.42toky      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/07 07:56:46 by hokutosuz         #+#    #+#             */
+/*   Updated: 2022/04/07 08:35:43 by hokutosuz        ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef FRACTOL_H
 # define FRACTOL_H
 
@@ -10,7 +22,6 @@
 
 # define WIDTH 300
 # define HEIGHT 300
-//# define MAX_ITER 200
 # define DEFAULT_MAX_ITER 100
 # define DEFAULT_JULIA_C_R -0.74667
 # define DEFAULT_JULIA_C_I 0.186667
@@ -19,17 +30,10 @@
 # define ZOOM_IN_RATIO 0.8
 # define ZOOM_OUT_RATIO 1.2
 
-//# define RED_PIXEL 0x00FF0000
-//# define GREEN_PIXEL 0x0000FF00
-//# define BLUE_PIXEL 0x000000FF
-//# define WHITE_PIXEL 0x00FFFFFF
-
 # define YELLOW 0
 # define RED 1
 # define GREEN 2
-//# define BLUE 3
 
-//# define KEY_Q 113
 # define KEY_ESC 65307
 # define KEY_SHIFT 65505
 # define KEY_L_ARROW 65361
@@ -39,10 +43,6 @@
 # define KEY_ALT 65406
 # define SCROLL_UP 4
 # define SCROLL_DOWN 5
-/*#define MOUSE_RIGHT 1
-# define MOUSE_CENTER 2
-# define MOUSE_LEFT 3
-*/
 
 typedef struct s_data
 {
@@ -59,14 +59,14 @@ typedef struct s_data
 	double	min_r;
 	double	max_i;
 	double	min_i;
-	int			max_it;
+	int		max_it;
 	double	c_r;
 	double	c_i;
 	double	z_r;
 	double	z_i;
 	double	delta_r;
 	double	delta_i;
-	int	color_theme;
+	int		color_theme;
 }	t_data;
 
 enum e_fractal_type {
@@ -78,13 +78,11 @@ enum e_fractal_type {
 enum e_input_type {
 	KEYDOWN = 2,
 	KEYUP = 3,
-//	ON_MOUSEDOWN = 4,
-//	ON_MOUSEUP = 5,
-//	ON_MOUSEMOVE = 6,
-//	ON_EXPOSE = 12,
-//	ON_DESTROY = 17,
 	ClientMessage = 33,
 };
+
+// main.c
+void			ft_destroy_all(t_data *data);
 
 // ft_init_data.c
 void			ft_init_data(t_data *data);
@@ -93,17 +91,12 @@ void			ft_init_data(t_data *data);
 void			ft_my_mlx_pixel_put(t_data *data, int x, int y, int color);
 int				ft_draw_mandelbrot(t_data *data);
 unsigned int	ft_pick_color(t_data *data);
-//uint32_t	ft_pick_color(t_data *data);
 
 // ft_draw_julia.c
 int				ft_draw_julia(t_data *data);
 
 // ft_rgb_to_hex.c
-//double			ft_abs(double val);
-//unsigned int	ft_hsv_to_hex(double h, double s, double v);
 unsigned int	ft_rgb_to_hex(int r, int g, int b);
-//uint32_t	rgb2hex(int r, int g, int b);
-//uint32_t	hsv2hex(double h, double s, double v);
 unsigned int	ft_gradation(t_data *data, double i, double z_r);
 
 // ft_key_down_hook.c

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_draw_julia.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hokutosuzuki <hosuzuki@student.42toky      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/07 07:58:16 by hokutosuz         #+#    #+#             */
+/*   Updated: 2022/04/07 08:01:22 by hokutosuz        ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fractol.h"
 
 int	ft_draw_julia(t_data *data)
@@ -6,7 +18,7 @@ int	ft_draw_julia(t_data *data)
 	int	y;
 
 	data->delta_r = (data->max_r - data->min_r) / (double)WIDTH;
-	data->delta_i = (data->max_i - data->min_i) /(double)HEIGHT;
+	data->delta_i = (data->max_i - data->min_i) / (double)HEIGHT;
 	y = 0;
 	while (y < HEIGHT)
 	{

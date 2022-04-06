@@ -1,48 +1,39 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_draw_burningship_bonus.c                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hokutosuzuki <hosuzuki@student.42toky      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/07 07:58:16 by hokutosuz         #+#    #+#             */
+/*   Updated: 2022/04/07 08:00:31 by hokutosuz        ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fractol_bonus.h"
 
-
-
 static unsigned int	ft_pick_color_bs(t_data *data)
-//static uint32_t	get_color_in_burningship(t_data *data)
 {
 	int		i;
 	int		color;
 	double	tmp_r;
 
 	i = 0;
-//	while (pow(data->z_r, 2.0) + pow(data->z_i, 2.0)  <= 4 && i < data->max_iter)
-	while (pow(data->z_r, 2.0) + pow(data->z_i, 2.0)  <= 4 && i < data->max_it)
+	while (pow(data->z_r, 2.0) + pow(data->z_i, 2.0) <= 4 && i < data->max_it)
 	{
-		tmp_r = pow(data->z_r, 2.0) - pow(data->z_i, 2.0)  + data->c_r;
+		tmp_r = pow(data->z_r, 2.0) - pow(data->z_i, 2.0) + data->c_r;
 		data->z_i = fabs(2 * (double)data->z_r * (double)data->z_i) + data->c_i;
 		data->z_r = tmp_r;
 		i++;
 	}
-//	if (i == data->max_iter)
 	if (i == data->max_it)
 		color = ft_rgb_to_hex(255, 255, 255);
 	else
-		color = ft_gradation(data, (double)i / (double)data->max_it, pow(data->z_r, 2.0));
-//		color = ft_gradation((double)i / data->max_iter, pow(data->z_r, 2.0));
-//		color = ft_hsv_to_hex(i % 360, (double)i / MAX_ITER, ((double)i / MAX_ITER));
-//		color = ft_hsv_to_hex(i % 360, (double)i / data->max_iter, ((double)i / data->max_iter));
+		color = ft_gradation(data, (double)i
+				/ (double)data->max_it, pow(data->z_r, 2.0));
 	return (color);
 }
 
-/*
- * Draw the burningship set.
- * A burning ship set is a set that does not diverge when z_n = z_(n-1) + C.
- * C is the position of the pixel to be drawn.
- * Z_0 should be set to 0
- *
- * If divergent, fill with black.
- *
- * Z_(n+1) = (abs(z_re) + abs(z_im)j) ^ 2 + C
- *   (Z is an expression for a complex number)
- *
- * The difference from the Mandelbrot set is that
- *   in barningship we take absolute values in sequences of iterations.
- */
 int	ft_draw_burningship(t_data *data)
 {
 	int	x;

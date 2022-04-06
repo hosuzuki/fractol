@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hokutosuzuki <hosuzuki@student.42toky      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/07 07:58:19 by hokutosuz         #+#    #+#             */
+/*   Updated: 2022/04/07 08:33:07 by hokutosuz        ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fractol_bonus.h"
 
 /*
@@ -9,7 +21,14 @@ void end(void)
 }
 */
 
-void	ft_update_fractal(t_data *data)
+void	ft_destroy_all(t_data *data)
+{
+	mlx_destroy_image(data->mlx, data->img);
+	mlx_destroy_window(data->mlx, data->win);
+	mlx_destroy_display(data->mlx);
+}
+
+static void	ft_update_fractal(t_data *data)
 {
 	int		x;
 	int		y;
@@ -17,18 +36,17 @@ void	ft_update_fractal(t_data *data)
 	double	y_cp;
 
 	mlx_mouse_get_pos(data->mlx, data->win, &x, &y);
-//	if (!x && !y)
 	if (!x || !y)
 		return ;
-//	x_cp = (double)x / (WIDTH / (data->max_r - data->min_r)) + data->min_r;
-//	y_cp = (double)y / (HEIGHT / (data->max_i - data->min_i)) * -1 + data->max_i;
-	x_cp = ((data->max_r - data->min_r) * (double)x) / (double)WIDTH + data->min_r;
-	y_cp = ((data->max_i - data->min_i) * (double)y) / (double)HEIGHT + data->min_i; // don't i need -1?
+	x_cp = ((data->max_r - data->min_r) * (double)x)
+		/ (double)WIDTH + data->min_r;
+	y_cp = ((data->max_i - data->min_i) * (double)y)
+		/ (double)HEIGHT + data->min_i;
 	data->c_r = x_cp;
 	data->c_i = y_cp;
 }
 
-int	ft_render(t_data *data)
+static int	ft_render(t_data *data)
 {
 	if (data->shift_on && data->fract_type == JULIA)
 		ft_update_fractal(data);
@@ -42,7 +60,7 @@ int	ft_render(t_data *data)
 	return (0);
 }
 
-int	select_fractal(t_data *data, char *str)
+static int	select_fractal(t_data *data, char *str)
 {
 	if (!ft_strncmp(str, "mandelbrot", 11))
 		data->fract_type = MANDELBROT;
@@ -69,16 +87,11 @@ int	main(int argc, char **argv)
 	}
 	ft_init_data(&data);
 	mlx_loop_hook(data.mlx, &ft_render, &data);
-	mlx_hook(data.win, KEYDOWN, 1L<<0, ft_key_down_hook, &data);
-	mlx_hook(data.win, KEYUP, 1L<<1, ft_key_up_hook, &data);
+	mlx_hook(data.win, KEYDOWN, 1L << 0, ft_key_down_hook, &data);
+	mlx_hook(data.win, KEYUP, 1L << 1, ft_key_up_hook, &data);
 	mlx_hook(data.win, ClientMessage, 1L << 17, ft_destroy_win_and_exit, &data);
 	mlx_mouse_hook(data.win, ft_mouse_hook, &data);
 	mlx_loop(data.mlx);
-	mlx_destroy_image(data.mlx, data.img);
-//	data.img = NULL;
-	mlx_destroy_window(data.mlx, data.win);
-//	data.win = NULL;
-	mlx_destroy_display(data.mlx);
-//	ft_free_all(&data);
+	ft_destroy_all(&data);
 	return (0);
 }
