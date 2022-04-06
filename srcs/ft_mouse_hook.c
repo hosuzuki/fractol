@@ -36,13 +36,13 @@ int	ft_mouse_hook(int button, int x, int y, t_data *data)
 		if (button == SCROLL_UP)
 		{
 			ft_scale(data, ZOOM_IN_RATIO);
-			data->max_it += 4;
+			data->max_it += 2;
 		}
 		else
 		{
 			ft_scale(data, ZOOM_OUT_RATIO);
 			if (4 < data->max_it)
-				data->max_it -= 4;
+				data->max_it -= 2;
 		}
 		ft_translation_back(data, x_cp, y_cp);
 	}

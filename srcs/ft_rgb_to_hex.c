@@ -13,28 +13,28 @@ unsigned int	ft_rgb_to_hex(int r, int g, int b)
 	return (color);
 }
 
-unsigned int ft_gradation(t_data *data, double i)
+unsigned int ft_gradation(t_data *data, double i, double z_r)
 {
 	if	(data->color_theme == YELLOW)
 	{
-		if (0.5 < i)
+		if (z_r < 5)
 			return (ft_rgb_to_hex(i * 255.0, i * 255.0, 0));
 		else 
-			return (ft_rgb_to_hex(i * 255.0, 0, 0));
+			return (ft_rgb_to_hex(i * 127.5, 0, i * 255.0));
 	}
 	else if 	(data->color_theme == RED)
 	{
-		if (0.5 < i)
+		if (z_r < 5)
 			return (ft_rgb_to_hex(i * 255.0, 0, 0));
 		else 
 		return (ft_rgb_to_hex(0, i * 255.0, 0));
 	}
 	else
 	{
-		if (0.5 < i)
+		if (z_r < 5)
 			return (ft_rgb_to_hex(0, i * 255.0, 0));
 		else
-			return (ft_rgb_to_hex(i * 255.0, i * 255.0, 0));
+			return (ft_rgb_to_hex(0, i * 255.0, i * 255.0));
 	}
 		//	else 
 //		return (ft_rgb_to_hex(0, 0, i * 255.0));
@@ -66,6 +66,7 @@ unsigned int ft_gradation(t_data *data, double i)
  * v: Value(Brightness) [0-1]
 //uint32_t	ft_hsv_to_hex(double h, double s, double v)
 */
+/*
 
 unsigned int	ft_hsv_to_hex(double h, double s, double v)
 {
@@ -94,7 +95,7 @@ unsigned int	ft_hsv_to_hex(double h, double s, double v)
 		return (ft_rgb_to_hex((0 + m) * 255, (0 + m) * 255, (0 + m) * 255));
 }
 
-
+*/
 /*
  int rgb_to_int(double r, double g, double b)
 {
