@@ -10,8 +10,8 @@
 
 # define WIDTH 300
 # define HEIGHT 300
-# define MAX_ITER 200
-//# define DEFAULT_MAX_ITER 200
+//# define MAX_ITER 200
+# define DEFAULT_MAX_ITER 100
 # define DEFAULT_JULIA_C_R -0.74667
 # define DEFAULT_JULIA_C_I 0.186667
 
@@ -23,6 +23,11 @@
 //# define GREEN_PIXEL 0x0000FF00
 //# define BLUE_PIXEL 0x000000FF
 //# define WHITE_PIXEL 0x00FFFFFF
+
+# define YELLOW 0
+# define RED 1
+# define GREEN 2
+//# define BLUE 3
 
 //# define KEY_Q 113
 # define KEY_ESC 65307
@@ -54,13 +59,14 @@ typedef struct s_data
 	double	min_r;
 	double	max_i;
 	double	min_i;
-//	int					max_iter; //do I need this?
+	int			max_it;
 	double	c_r;
 	double	c_i;
 	double	z_r;
 	double	z_i;
 	double	delta_r;
 	double	delta_i;
+	int	color_theme;
 }	t_data;
 
 enum e_fractal_type {
@@ -94,11 +100,11 @@ int				ft_draw_julia(t_data *data);
 
 // ft_rgb_to_hex.c
 //double			ft_abs(double val);
-//unsigned int	ft_hsv_to_hex(double h, double s, double v);
+unsigned int	ft_hsv_to_hex(double h, double s, double v);
 unsigned int	ft_rgb_to_hex(int r, int g, int b);
 //uint32_t	rgb2hex(int r, int g, int b);
 //uint32_t	hsv2hex(double h, double s, double v);
-unsigned int	ft_gradation(double i, double pow);
+unsigned int	ft_gradation(t_data *data, double i);
 
 // ft_key_down_hook.c
 int				ft_destroy_win_and_exit(t_data *data);
