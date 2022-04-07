@@ -44,9 +44,9 @@ $(NAME) : $(LIB) $(MLX_PATH) $(MLX) $(OBJ)
 	@echo "$(NAME): $(GREEN)object files were created$(RESET)"
 	@echo "$(NAME): $(GREEN)$(NAME) was created$(RESET)"
 
-#$(MLX_PATH) :
-#	git clone https://github.com/42Paris/minilibx-linux.git $(MLX_PATH)
-#	make -C $(MLX_PATH)
+$(MLX_PATH) :
+	git clone https://github.com/42Paris/minilibx-linux.git $(MLX_PATH)
+	make -C $(MLX_PATH)
 
 .c.o :
 	$(CC) $(FLAGS) -c $< -o $(<:.c=.o) $(HEAD)
