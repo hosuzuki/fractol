@@ -6,7 +6,7 @@
 /*   By: hokutosuzuki <hosuzuki@student.42toky      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 07:58:17 by hokutosuz         #+#    #+#             */
-/*   Updated: 2022/04/07 09:01:45 by hokutosuz        ###   ########.fr       */
+/*   Updated: 2022/04/07 14:24:03 by hokutosuz        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	ft_key_down_hook(int keysym, t_data *data)
 	else if (keysym == KEY_UP_ARROW || keysym == KEY_DW_ARROW
 		|| keysym == KEY_L_ARROW || keysym == KEY_R_ARROW)
 		ft_move_win(keysym, data);
-	else if (keysym == KEY_ALT)
+	else if (keysym == KEY_ALT || keysym == KEY_ALT_X)
 		ft_change_color(data);
 	else if (keysym == KEY_ESC)
 		ft_destroy_all_and_exit(data);
