@@ -6,20 +6,11 @@
 /*   By: hokutosuzuki <hosuzuki@student.42toky      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 07:58:19 by hokutosuz         #+#    #+#             */
-/*   Updated: 2022/04/07 09:01:47 by hokutosuz        ###   ########.fr       */
+/*   Updated: 2022/04/07 11:34:03 by hokutosuz        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol_bonus.h"
-
-/*
-void end(void)__attribute__((destructor));
-
-void end(void)
-{
-    system("leaks fractol");
-}
-*/
 
 static void	ft_update_fractal(t_data *data)
 {

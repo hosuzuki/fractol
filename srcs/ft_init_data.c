@@ -6,7 +6,7 @@
 /*   By: hokutosuzuki <hosuzuki@student.42toky      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 07:58:17 by hokutosuz         #+#    #+#             */
-/*   Updated: 2022/04/07 09:01:45 by hokutosuz        ###   ########.fr       */
+/*   Updated: 2022/04/07 11:35:25 by hokutosuz        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ static void	ft_put_defaults(t_data *data)
 {
 	if (data->fract_type == MANDELBROT)
 	{
-		data->max_r = 1.7;
-		data->min_r = -2.3;
+		data->max_r = 1.5;
+		data->min_r = -2.5;
 	}
 	else
 	{
