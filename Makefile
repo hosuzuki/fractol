@@ -4,7 +4,11 @@ FLAGS = -Wall -Werror -Wextra
 LIB = ./libft/libft.a
 MLX = ./minilibx-linux/libmlx.a
 MLX_PATH := ./minilibx-linux
-LIBRARIES = -L/usr/X11R6/lib  -lmlx -lX11 -lXext -framework OpenGL -framework AppKit -L ./minilibx-linux/
+#for Mac
+#LIBRARIES = -lmlx -lX11 -lXext -framework OpenGL -framework AppKit -L ./minilibx-linux/
+#LIBRARIES = -L/usr/X11R6/lib  -lmlx -lX11 -lXext -framework OpenGL -framework AppKit -L ./minilibx-linux/
+#for xubuntu
+LIBRARIES = -L/usr/X11R6/lib -lmlx -lX11 -lXext -L ./minilibx-linux/
 #-L ./libft/ -L ./minilibx-linux/
 SRC = ./srcs/main.c \
 			./srcs/ft_init_data.c \
