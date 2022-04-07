@@ -6,7 +6,7 @@ MLX = ./minilibx-linux/libmlx.a
 MLX_PATH := ./minilibx-linux
 #for Mac
 #LIBRARIES = -lmlx -lX11 -lXext -framework OpenGL -framework AppKit -L ./minilibx-linux/
-LIBRARIES = -L/usr/X11R6/lib  -lmlx -lX11 -lXext -framework OpenGL -framework AppKit -L ./minilibx-linux/
+LIBRARIES = -L/usr/X11R6/lib -lm -lmlx -lX11 -lXext -framework OpenGL -framework AppKit -L ./minilibx-linux/
 #for xubuntu
 #LIBRARIES = -lm -lmlx -lX11 -lXext -L ./minilibx-linux/
 #LIBRARIES = -L/usr/X11R6/lib -lm -lmlx -lX11 -lXext -L ./minilibx-linux/
