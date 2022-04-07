@@ -6,7 +6,7 @@
 /*   By: hokutosuzuki <hosuzuki@student.42toky      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 07:56:46 by hokutosuz         #+#    #+#             */
-/*   Updated: 2022/04/07 08:50:48 by hokutosuz        ###   ########.fr       */
+/*   Updated: 2022/04/07 14:23:34 by hokutosuz        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@
 # define KEY_R_ARROW 65363
 # define KEY_DW_ARROW 65364
 # define KEY_ALT 65406
+# define KEY_ALT_X 65513
 # define SCROLL_UP 4
 # define SCROLL_DOWN 5
 
