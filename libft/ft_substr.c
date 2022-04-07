@@ -6,7 +6,7 @@
 /*   By: hokutosuzuki <marvin@42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 18:03:52 by hokutosuz         #+#    #+#             */
-/*   Updated: 2021/11/20 07:48:22 by hokutosuz        ###   ########.fr       */
+/*   Updated: 2022/04/07 12:05:39 by hokutosuz        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,9 @@
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	size_t	i;
 	size_t	s_length;
 	char	*str;
 
-	i = 0;
 	if (!s)
 		return (NULL);
 	s_length = ft_strlen((char *)s);
