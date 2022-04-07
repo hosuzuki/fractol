@@ -12,7 +12,8 @@ SRC = ./srcs/main.c \
 			./srcs/ft_draw_julia.c \
 			./srcs/ft_key_down_hook.c \
 			./srcs/ft_mouse_hook.c \
-			./srcs/ft_rgb_to_hex.c
+			./srcs/ft_rgb_to_hex.c \
+			./srcs/ft_destroy.c
 
 BONUS_SRC = ./srcs/main_bonus.c \
 			./srcs/ft_init_data.c \
@@ -21,6 +22,7 @@ BONUS_SRC = ./srcs/main_bonus.c \
 			./srcs/ft_key_down_hook.c \
 			./srcs/ft_mouse_hook.c \
 			./srcs/ft_rgb_to_hex.c \
+			./srcs/ft_destroy.c \
 			./srcs/ft_draw_burningship_bonus.c 
 
 GREEN = \033[0;32m

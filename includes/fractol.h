@@ -6,7 +6,7 @@
 /*   By: hokutosuzuki <hosuzuki@student.42toky      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 07:56:46 by hokutosuz         #+#    #+#             */
-/*   Updated: 2022/04/07 08:35:43 by hokutosuz        ###   ########.fr       */
+/*   Updated: 2022/04/07 08:50:48 by hokutosuz        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,6 @@ enum e_input_type {
 	ClientMessage = 33,
 };
 
-// main.c
-void			ft_destroy_all(t_data *data);
-
 // ft_init_data.c
 void			ft_init_data(t_data *data);
 
@@ -100,11 +97,14 @@ unsigned int	ft_rgb_to_hex(int r, int g, int b);
 unsigned int	ft_gradation(t_data *data, double i, double z_r);
 
 // ft_key_down_hook.c
-int				ft_destroy_win_and_exit(t_data *data);
-int				ft_key_down_hook(int keysym, t_data *data);
 int				ft_key_up_hook(int keysym, t_data *data);
+int				ft_key_down_hook(int keysym, t_data *data);
 
 // ft_mouse_hook.c
 int				ft_mouse_hook(int button, int x, int y, t_data *data);
+
+// ft_destroy.c
+void			ft_destroy_all(t_data *data);
+int			ft_destroy_all_and_exit(t_data *data);
 
 #endif
