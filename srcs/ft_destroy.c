@@ -1,36 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_draw_julia.c                                    :+:      :+:    :+:   */
+/*   ft_destroy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hokutosuzuki <hosuzuki@student.42toky      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/07 07:58:16 by hokutosuz         #+#    #+#             */
-/*   Updated: 2022/04/07 09:01:44 by hokutosuz        ###   ########.fr       */
+/*   Created: 2022/04/07 09:01:43 by hokutosuz         #+#    #+#             */
+/*   Updated: 2022/04/07 09:01:43 by hokutosuz        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int	ft_draw_julia(t_data *data)
+void	ft_destroy_all(t_data *data)
 {
-	int	x;
-	int	y;
+	mlx_destroy_image(data->mlx, data->img);
+	mlx_destroy_window(data->mlx, data->win);
+	mlx_destroy_display(data->mlx);
+}
 
-	data->delta_r = (data->max_r - data->min_r) / (double)WIDTH;
-	data->delta_i = (data->max_i - data->min_i) / (double)HEIGHT;
-	y = 0;
-	while (y < HEIGHT)
-	{
-		x = 0;
-		while (x < WIDTH)
-		{
-			data->z_i = data->min_i + y * data->delta_i;
-			data->z_r = data->min_r + x * data->delta_r;
-			ft_my_mlx_pixel_put(data, x, y, ft_pick_color(data));
-			x++;
-		}
-		y++;
-	}
-	return (0);
+int	ft_destroy_all_and_exit(t_data *data)
+{
+	ft_destroy_all(data);
+	exit (0);
 }
