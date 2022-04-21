@@ -6,7 +6,7 @@
 /*   By: hokutosuzuki <hosuzuki@student.42toky      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 07:58:16 by hokutosuz         #+#    #+#             */
-/*   Updated: 2022/04/07 09:01:44 by hokutosuz        ###   ########.fr       */
+/*   Updated: 2022/04/21 15:16:37 by hokutosuz        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static unsigned int	ft_pick_color_bs(t_data *data)
 		i++;
 	}
 	if (i == data->max_it)
-		color = ft_rgb_to_hex(255, 255, 255);
+		color = ft_rgb(255, 255, 255);
 	else
 		color = ft_gradation(data, (double)i
 				/ (double)data->max_it, pow(data->z_r, 2.0));

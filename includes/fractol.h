@@ -6,7 +6,7 @@
 /*   By: hokutosuzuki <hosuzuki@student.42toky      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 07:56:46 by hokutosuz         #+#    #+#             */
-/*   Updated: 2022/04/21 15:05:51 by hokutosuz        ###   ########.fr       */
+/*   Updated: 2022/04/21 15:18:19 by hokutosuz        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,8 @@ unsigned int	ft_pick_color(t_data *data);
 // ft_draw_julia.c
 int				ft_draw_julia(t_data *data);
 
-// ft_rgb_to_hex.c
-unsigned int	ft_rgb_to_hex(int r, int g, int b);
+// ft_rgb.c
+unsigned int	ft_rgb(int r, int g, int b);
 unsigned int	ft_gradation(t_data *data, double i, double z_r);
 
 // ft_key_down_hook.c
