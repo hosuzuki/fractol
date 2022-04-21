@@ -6,7 +6,7 @@
 /*   By: hokutosuzuki <hosuzuki@student.42toky      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 07:56:46 by hokutosuz         #+#    #+#             */
-/*   Updated: 2022/04/07 14:23:34 by hokutosuz        ###   ########.fr       */
+/*   Updated: 2022/04/21 15:05:51 by hokutosuz        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,6 @@ int				ft_mouse_hook(int button, int x, int y, t_data *data);
 
 // ft_destroy.c
 void			ft_destroy_all(t_data *data);
-int			ft_destroy_all_and_exit(t_data *data);
+int				ft_destroy_all_and_exit(t_data *data);
 
 #endif
