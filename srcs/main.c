@@ -6,7 +6,7 @@
 /*   By: hokutosuzuki <hosuzuki@student.42toky      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 07:58:18 by hokutosuz         #+#    #+#             */
-/*   Updated: 2022/04/07 11:46:35 by hokutosuz        ###   ########.fr       */
+/*   Updated: 2022/10/05 11:27:07 by hos              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	main(int argc, char **argv)
 	mlx_loop_hook(data.mlx, &ft_render, &data);
 	mlx_hook(data.win, KEYDOWN, 1L << 0, ft_key_down_hook, &data);
 	mlx_hook(data.win, KEYUP, 1L << 1, ft_key_up_hook, &data);
-	mlx_hook(data.win, ClientMessage, 1L << 17, ft_destroy_all_and_exit, &data);
+	mlx_hook(data.win, ClientMess, 1L << 17, ft_destroy_all_and_exit, &data);
 	mlx_mouse_hook(data.win, ft_mouse_hook, &data);
 	mlx_loop(data.mlx);
 	ft_destroy_all(&data);

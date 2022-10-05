@@ -6,7 +6,7 @@
 /*   By: hokutosuzuki <hosuzuki@student.42toky      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 07:56:46 by hokutosuz         #+#    #+#             */
-/*   Updated: 2022/04/21 15:18:19 by hokutosuz        ###   ########.fr       */
+/*   Updated: 2022/10/05 11:26:31 by hos              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@
 # include "../minilibx-linux/mlx.h"
 # include "../libft/includes/libft.h"
 # include "../libft/includes/ft_printf.h"
+
+ #include <X11/Xlib.h>
+ #include <sys/ipc.h>
+ #include <sys/shm.h>
+ #include <X11/extensions/XShm.h>
 
 # include <math.h>
 # include <stdio.h>
@@ -79,7 +84,7 @@ enum e_fractal_type {
 enum e_input_type {
 	KEYDOWN = 2,
 	KEYUP = 3,
-	ClientMessage = 33,
+	ClientMess = 33,
 };
 
 // ft_init_data.c
